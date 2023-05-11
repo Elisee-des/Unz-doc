@@ -1,0 +1,40 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail du module {{ module.nom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail du module <strong>{{ module.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id }) }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+		<i class="mdi mdi-reply-all  "></i>
+	Retour</a>
+{% endblock %}
+
+{% block body %}
+
+		<div class="contenu">
+			<div class="row">
+				<div class="col-lg-6 mb-3">
+					<div class="card p-3">
+						<h3>Nom du module : <strong>{{module.nom}}</strong></h3>
+						<h3><br> Année universitaire: <strong>{{annee.nom}}</strong></h3>
+						<h3><br>Date d'ajout : <strong>{{module.dateCreation|date("j/m/y")}}</strong></h3>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="card p-3">
+					<div><h3><strong>Option de gestion</strong> </h3></div>
+						<div class="card p-3">
+							<div><br><a href="{{ path("app_admin_module_edition", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id , "idAnnee": annee.id, "idModule": module.id }) }}" title="Cliquez ici pour modifier cette annee" class="btn btn-secondary btn-lg"><i class="mdi mdi-grease-pencil"></i>Modifier l'année</a></div>
+							<div><a href="{{ path("app_admin_module_suppression", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id ,"idAnnee": annee.id, "idModule": module.id }) }}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet annee ?')" title="Cliquez ici pour supprimer cette annee" class="btn btn-danger btn-lg"><i class="mdi mdi-cup "></i>Supprimer l'année</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+{% endblock %}

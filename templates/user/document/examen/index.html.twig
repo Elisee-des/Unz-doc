@@ -1,0 +1,179 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Examens de  {{ module.nom }}
+{% endblock %}
+
+{% block titre %}
+	Examens de  <strong>{{ module.nom }}</strong>
+{% endblock %}
+
+{% block description %}
+	<a href="{{ path("app_user_document_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un examen">
+		<i class="mdi mdi-reply-all  "></i>Retour
+    </a>
+{% endblock %}
+
+{% block body %}
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            {% endfor %}
+
+                  <h4 class="text-center">Examens	<a href="{{ path("app_user_document_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un examen">
+                  <i class="mdi mdi-reply-all  "></i>Retour
+                  </a></h4>
+
+                  {% if examens == NULL %}
+                    <h4 class="text-center"><strong>Aucun examen proposé pour le moment. Si vous en possédé, merci de proposé.</strong></h4>
+                    <div>
+                        <h4 class="text-center"><a href="{{ path("app_user_document_proposition_examen", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" class="btn btn-outline-primary mb-1">Proposer un sujet</a></h4>
+                    </div>
+                    {# <div>
+                      {% for propositionExamen in propositionExamens %}
+                          <div class="content">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="card mb-3">
+                                <div class="card-body">
+                                  <ul class="list-group">
+                                    <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Examen proposé par: {{ propositionExamen.nom_prenom }}</li>
+                                    <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Session : {{ propositionExamen.nom_session }}</li>
+                                    <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>Filière: {{filiere.nom}}</li>
+                                    <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Année accademique: {{annee.nom}}</li>
+                                    <li class="list-group-item"><i class="bi bi-exclamation-octagon me-1 text-warning"></i>Date d'ajout: {{propositionExamen.date_creation}}</li>
+                                    <li class="list-group-item"><a href="{{ path("app_user_document_telecharger_proposition_examen", {"idPropositionExamen": propositionExamen.id}) }}" 
+                                    class="btn btn-outline-danger">Télecharger l'examen</a></li>
+                                  </ul><!-- End List group With Icons -->
+                                </div>
+                              </div>  
+                              </div>
+                            </div>
+                          </div>
+
+                      {% endfor %}
+                    </div> #}
+                    
+                  {% else %}
+                      {% for examen in examens %}
+                          <div class="card">
+                          <div class="card-content">
+                              <div class="card-body">
+                                  <h5 class="card-title">{{examen.nom}}</h5>
+                              </div>
+                          </div>
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Nom du module: {{ module.nom }}</li>
+                              <li class="list-group-item">Filière: {{filiere.nom}}</li>
+                              <li class="list-group-item">Année accademique: {{annee.nom}}</li>
+                              <li class="list-group-item">Remarque: {% if examen.remarque == '' %}
+                                <p>Aucune remarque</p>
+                                {% else %}
+                                {{examen.remarque}}
+                              {% endif %}</li>
+                              <li class="list-group-item">Taille du fichier: {{examen.taille_fichier}}</li>
+                              <li class="list-group-item">Date d'ajout: {{examen.date_creation}}</li>
+                              <li class="list-group-item">{% if examen.fichier =="aucunFichier" %} <p>Aucun fichier</p>
+                                {% else %}
+                                <a href="{{ path("app_user_document_examen_telecharger", {"idExamen": examen.id}) }}" 
+                              class="btn btn-outline-danger">Télecharger l'examen</a>
+                              {% endif %}
+                              </li>
+                          </ul>
+                        </div>
+                      {% endfor %}
+                  {% endif %}
+                    
+                      
+                  {# {% else if propositionExamens != NULL %}
+                    {% for propositionExamen in propositionExamens %}
+                        {% if propositionExamen.status == true %}
+                          <div class="card">
+                          <div class="card-content">
+                              <div class="card-body">
+                                  <h5 class="card-title">{{propositionExamen.nom}}</h5>
+                              </div>
+                          </div>
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Nom du module: {{ module.nom }}</li>
+                              <li class="list-group-item">Filière: {{filiere.nom}}</li>
+                              <li class="list-group-item">Année accademique: {{annee.nom}}</li>
+                              <li class="list-group-item">Taille du fichier: {{examen.taille_fichier}}</li>
+                              <li class="list-group-item">Date d'ajout: {{propositionExamen.date_creation}}</li>
+                              <li class="list-group-item">{% if propositionExamen.fichier =="aucunFichier" %} <p>Aucun fichier</p>
+                                {% else %}
+                                <a href="{{ path("app_user_document_telecharger_proposition_examen", {"idPropositionExamen": propositionExamen.id}) }}" 
+                              class="btn btn-outline-danger">Télecharger l'examen</a>
+                              {% endif %}</li>
+                          </ul>
+                        </div>
+                        {% endif %}
+                      {% endfor %}
+                  {% endif %} #}
+
+
+
+                  <hr>
+                  <h4 class="text-center">Corrections</h4>
+                  {% if corrections == NULL %}
+                    <h4 class="text-center"><strong>Aucune correction proposé par les administrateurs pour le moment. Si vous en possédé, merci de proposé.</strong></h4>
+                    <div>
+                        <h4 class="text-center"><a href="{{ path("app_user_document_proposition_correction", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" class="btn btn-outline-primary mb-1">Proposer une correction</a></h4>
+                    </div>
+                    {# <div>
+                      {% for propositionExamen in propositionExamens %}
+                          <div class="content">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="card mb-3">
+                                <div class="card-body">
+                                  <ul class="list-group">
+                                    <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Examen proposé par: {{ propositionExamen.nom_prenom }}</li>
+                                    <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Session : {{ propositionExamen.nom_session }}</li>
+                                    <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>Filière: {{filiere.nom}}</li>
+                                    <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Année accademique: {{annee.nom}}</li>
+                                    <li class="list-group-item"><i class="bi bi-exclamation-octagon me-1 text-warning"></i>Date d'ajout: {{propositionExamen.date_creation}}</li>
+                                    <li class="list-group-item"><a href="{{ path("app_user_document_telecharger_proposition_examen", {"idPropositionExamen": propositionExamen.id}) }}" 
+                                    class="btn btn-outline-danger">Télecharger l'examen</a></li>
+                                  </ul><!-- End List group With Icons -->
+                                </div>
+                              </div>  
+                              </div>
+                            </div>
+                          </div>
+
+                      {% endfor %}
+                    </div> #}
+                  {% else %}
+                      {% for correction in corrections %}
+                        <div class="card">
+                          <div class="card-content">
+                              <div class="card-body">
+                                  <h5 class="card-title">{{correction.nom}}</h5>
+                              </div>
+                          </div>
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Nom du module: {{ module.nom }}</li>
+                              <li class="list-group-item">Filière: {{filiere.nom}}</li>
+                              <li class="list-group-item">Année accademique: {{annee.nom}}</li>
+                              <li class="list-group-item">Remarque: {% if correction.remarque == '' %}
+                                <p>Aucune remarque</p>
+                                {% else %}
+                                {{correction.remarque}}
+                              {% endif %}</li>
+                              <li class="list-group-item">Taille du fichier: {{correction.taille_fichier}}</li>
+                              <li class="list-group-item">Date d'ajout: {{correction.date_creation}}</li>
+                              <li class="list-group-item">{% if correction.fichier =="aucunFichier" %} <p>Aucun fichier</p>
+                                {% else %}
+                                <a href="{{ path("app_user_document_examen_telecharger_correction", {"idCorrection": correction.id}) }}" 
+                              class="btn btn-outline-danger">Télecharger la correction</a>
+                              {% endif %}</li>
+                          </ul>
+                        </div>
+                      {% endfor %}
+                  {% endif %}
+      {% endblock %}

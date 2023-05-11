@@ -1,0 +1,40 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail de la licence {{ licence.nom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail de la licence <strong>{{ licence.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_licence_liste", {"idDepartement": departement.id, "idFiliere": filiere.id}) }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+		<div class="contenu">
+			<div class="row">
+				<div class="col-lg-6 mb-3">
+					<div class="card p-3">
+						<h3>Nom de la licence : <strong>{{licence.nom}}</strong></h3>
+						<h3><br> Nom de sa filière: <strong>{{licence.filiere.nom}}</strong></h3>
+						<h3><br>Date d'ajout : <strong>{{licence.dateCreation|date("j/m/y")}}</strong></h3>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="card p-3">
+					<div><h3><strong>Option de gestion</strong> </h3></div>
+						<div class="card p-3">
+							<div><br><a href="{{ path("app_admin_licence_edition", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id }) }}" title="Cliquez ici pour modifier cette licence" class="btn btn-secondary btn-lg"><i class="mdi mdi-grease-pencil"></i>Modifier la licence</a></div>
+						<div><a href="{{ path("app_admin_licence_suppression", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id }) }}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet licence ?')" title="Cliquez ici pour supprimer cette licence" class="btn btn-danger btn-lg"><i class="mdi mdi-cup "></i>Supprimer la licence</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+{% endblock %}

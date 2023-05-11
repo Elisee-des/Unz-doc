@@ -1,0 +1,38 @@
+{% extends 'base.main.html.twig' %}
+
+{% block title %}
+	Inscription
+{% endblock %}
+
+{% block navbar %}
+		<li><a href="{{ path("app_main_page_principal") }}">Accueil</a></li>
+{% endblock %}
+
+{% block intro %}
+		<div class="card p-2">
+			<h2>Inscription</h2>
+
+		<div class="card p-2 input-numero">
+				{{ form_start(registrationForm) }}  <br>
+			{{ form_row(registrationForm.numero) }} <br>
+			{{ form_row(registrationForm.password) }} <br>
+			{{ form_row(registrationForm.nomPrenom) }} <br>
+			{{ form_row(registrationForm.email) }} <br>
+			{{ form_row(registrationForm.motSecret) }} <br>
+			{{ form_row(registrationForm.ine) }} <br>
+			{{ form_row(registrationForm.image) }} <br>
+			{{ form_row(registrationForm.filiere) }}<br>
+			{{ form_row(registrationForm.specialite) }}<br>
+			{{ form_row(registrationForm.annee) }} <br>
+			{{ form_row(registrationForm.agreeTerms) }} <br>
+			<button type="submit" class="col-12 btn-book-a-table w-100">Inscription</button>
+			{{ form_end(registrationForm) }}
+		</div>
+		<div class="col-12"><br>
+        	<div class="card">
+        	<p class="small center mb-0">J'ai déja un compte <a href="{{ path("app_login") }}">Connexion</a></p>
+        	<p class="small center mb-0">Revenir a la page d'accueil <a href="{{ path("app_main_page_principal") }}">Retour</a></p>
+			</div>
+    	</div>
+		</div>
+{% endblock %}

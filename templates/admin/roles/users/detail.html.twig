@@ -1,0 +1,58 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail de l'utilisateur {{ user.nomPrenom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail de l'utilisateur <strong>{{ user.nomPrenom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_roles_etudiant_edition", {"idEtudiant": user.id}) }}" title="Cliquez ici pour editer l'user" class="btn btn-info align-items-center">
+			<i class="mdi mdi-arrow-all"></i>
+			Editer</a>
+      	<a href="{{ path("app_admin_roles_etudiant_suppression", {"idEtudiant": user.id}) }}" title="Cliquez ici pour supprimer l'user" onclick="return confirm('Etes vous sûr de vouloir supprimer cet utilisateur ?')" class="btn btn-danger align-items-center">
+			<i class="mdi mdi-arrow-all"></i>
+			Supprimer</a>
+	<a href="{{ path("app_admin_roles_user_bani", {"idUser": user.id}) }}" title="Cliquez ici pour banir cet utilisateur" onclick="return confirm('Etes vous sûr de vouloir banir cette utilisateur ? Il ne pourra plus accéder a son compte UNZ-DOC')" class="btn btn-warning align-items-center">
+			<i class="mdi mdi-account-remove "></i>
+			Banir</a>
+	<a href="{{ path("app_admin_roles_user_liste") }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all"></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                          <div class="card-body">
+                          <h4 class="card-title"> </h4>
+                            {# <h5 class="card-title">{{examen.status}}</h5> #}
+
+                            <!-- List group With Icons -->
+                            <ul class="list-group">
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Nom Prénom: {{ user.nomPrenom }}</li>
+                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>numéro de téléphone: {{user.numero}} </li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Email: {{user.email}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Ine: {{user.ine}}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Mot secret: {{user.motSecret}}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>promotion: {{user.annee}}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Date d'inscription: {{user.dateCreation|date("j/m/y")}}
+                              {% if user.photo == 'rien' %}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Image: <img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" width="100px"></li>
+                              {% else %}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Image: <img src="{{ asset("fichiers/"~user.photo) }}" width="100px"></li>
+                              {% endif %}
+                            </ul><!-- End List group With Icons -->
+
+                          </div>
+                        </div>
+					</div>
+					</div>
+				</div>
+
+{% endblock %}

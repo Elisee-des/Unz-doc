@@ -1,0 +1,23 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Ajout un etudiant à unz-doc
+{% endblock %}
+
+{% block titre %}
+	Ajout un etudiant à unz-doc<strong></strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_roles_etudiant_liste") }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="card p-3">
+		{{ form(formEtudiant) }}
+	</div>
+
+{% endblock %}

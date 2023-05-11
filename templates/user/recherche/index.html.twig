@@ -1,0 +1,89 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Liste des années universitaire de l'option
+{% endblock %}
+
+{% block titre %}
+	Liste des années universitaire de l'option
+	<strong></strong>
+{% endblock %}
+
+{% block description %}
+	{# <a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+			<i class="mdi mdi-reply-all  "></i>Retour
+	    </a> #}
+{% endblock %}
+
+{% block body %}
+
+	<div class="card">
+		<div class="card-header d-flex justify-content-between align-items-center">
+			<h4 class="card-title">Effectuer une recherche
+			</h4>
+			{# <div class="d-flex ">
+			      	<a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+			        <i class="mdi mdi-reply-all  "></i>Retour
+			        </a>
+						</div> #}
+		</div>
+		<div class="card-body px-0 pb-0">
+			<div class="table-responsive">
+				<div class="container">
+					{{ form(formRecherche) }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h4 class="text-center">Resultat de la recherche</h4>
+
+		{% if examens == NULL %}
+			<h4 class="text-center">
+				<strong>Aucun examen proposé pour le moment. Si vous en possédé, merci de proposé.</strong>
+			</h4>
+			<div>
+				<h4 class="text-center">
+					<a href="{{ path("app_user_document_proposition_examen", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" class="btn btn-outline-primary mb-1">Proposer un sujet</a>
+				</h4>
+			</div>
+
+		{% else %}
+			{% for examen in examens %}
+				<div class="card">
+					<div class="card-content">
+						<div class="card-body">
+							<h5 class="card-title">{{examen.nom}}</h5>
+						</div>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Nom du module:
+							{{ module.nom }}</li>
+						<li class="list-group-item">Filière:
+							{{filiere.nom}}</li>
+						<li class="list-group-item">Année accademique:
+							{{annee.nom}}</li>
+						<li class="list-group-item">Remarque:
+							{% if examen.remarque == '' %}
+								<p>Aucune remarque</p>
+							{% else %}
+								{{examen.remarque}}
+							{% endif %}
+						</li>
+						<li class="list-group-item">Taille du fichier:
+							{{examen.taille_fichier}}</li>
+						<li class="list-group-item">Date d'ajout:
+							{{examen.date_creation}}</li>
+						<li class="list-group-item">
+							{% if examen.fichier =="aucunFichier" %}
+								<p>Aucun fichier</p>
+							{% else %}
+								<a href="{{ path("app_user_document_examen_telecharger", {"idExamen": examen.id}) }}" class="btn btn-outline-danger">Télecharger l'examen</a>
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+	{% endblock %}

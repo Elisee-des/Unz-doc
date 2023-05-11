@@ -1,0 +1,47 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	UNZ-DOC - Erreur
+	{{ exception.statusCode }}
+{% endblock %}
+
+{# {% block titre %}
+	Liste des années universitaire de l'option <strong>{{ licence.nom }}</strong>
+{% endblock %} #}
+
+{# {% block boutons %}
+<a href="{{ path("app_admin_annee_ajout", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter une année
+    </a>
+	<a href="{{ path("app_admin_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+		<i class="mdi mdi-reply-all  "></i>Retour
+    </a>
+{% endblock %} #}
+
+{% block body %}
+
+	<div class="
+			    flex
+			    items-center
+			    justify-center
+			    w-screena
+			    h-screen
+			    bg-gradient-to-r
+			    from-white-600
+			    to-blue-400
+			  ">
+		<div>
+			<div class="flex flex-col items-center">
+				<h3 class="font-bold text-blue-600 text-9xl">HTTP Error
+					{{ exception.statusCode }}</h3>
+
+				<p class="my-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
+					{{ exception.statusText }}
+				</p>
+
+				<a href="" class="px-6 py-2 mt-6 text-sm font-semibold text-blue-800 bg-blue-100">Retourner à l'accueil</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

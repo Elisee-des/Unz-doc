@@ -1,0 +1,47 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	liste des personne a remercié.
+{% endblock %}
+
+{% block titre %}
+	liste des personnes a remercié. Ces personnes ont participé a la mise en place de Unz-doc.
+{% endblock %}
+
+{% block boutons %}
+<a href="{{ path("app_admin_remerciement_ajout") }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un option">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter une personne
+    </a>
+{% endblock %}
+
+{% block body %}
+            
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <div class="table-responsive">
+                    <table class="table table">
+                      <thead>
+                        <tr>
+                          <th>Nom Prénom</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for etudiant in etudiants %}
+                        <tr>
+                          <td><strong>{{ etudiant.nomPrenom }}</strong></td>
+                          <td>
+                          <a href="{{ path("app_admin_remerciement_detail", {"id": etudiant.id}) }}",  class="btn btn-outline-primary">voir détail</a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

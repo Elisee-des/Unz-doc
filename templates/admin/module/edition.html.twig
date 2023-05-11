@@ -1,0 +1,24 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Edition du module {{ module.nom }}
+{% endblock %}
+
+{% block titre %}
+	Edition du module : <strong>{{ module.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_annee_detail", {"idDepartement": departement.id,
+	 "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="card p-3">
+		{{ form(formModule) }}
+	</div>
+
+{% endblock %}

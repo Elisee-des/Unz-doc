@@ -1,0 +1,39 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Edition de l'image de mon profil
+{% endblock %}
+
+{% block titre %}
+	Edition des l'image de mon profil
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_compte_parametre_dashboard") }}" class="btn btn-outline-primary align-items-center">
+		<i class="mdi mdi-arrow-left "></i>Retour
+	</a>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="content">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="card p-3 mb-3">
+						{{ form(formEditionImage) }}
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="card p-3">
+							{% if app.user.photo != 'rien' %}
+								<img src="{{ asset("fichiers/"~app.user.photo) }}"  width="150px">
+							{% else %}
+								<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}"  width="150px">
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

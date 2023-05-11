@@ -1,0 +1,55 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Liste des années universitaire de l'option {{ licence.nom }}
+{% endblock %}
+
+{% block titre %}
+	Liste des années universitaire de l'option <strong>{{ licence.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+<a href="{{ path("app_admin_annee_ajout", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter une année
+    </a>
+	<a href="{{ path("app_admin_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+		<i class="mdi mdi-reply-all  "></i>Retour
+    </a>
+{% endblock %}
+
+{% block body %}
+	
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <div class="table-responsive">
+                  {% if annees == NULL %}
+                    <h3 class="text-center"><strong>Aucune année universitaire pour le moment.</strong></h3>
+                  {% else %}
+                  <table class="table table">
+                      <thead>
+                        <tr>
+                          <th>Années universitaire</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for annee in annees %}
+                        <tr>
+                          <td><strong>{{ annee.nom }}</strong></td>
+                          <td>
+                            <a href="{{ path("app_admin_annee_detail", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" title="Cliquez ici pour voir les détails cette annee" class="btn btn-outline-dark">Détails</a>
+                            <a href="{{ path("app_admin_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary">Modules</a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                  </table>
+                  {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.main.html.twig' %}
+
+{% block title %}
+	Message de confirmation d'envoi de message
+{% endblock %}
+
+{% block intro %}
+    <h1>Message</h1>
+{% endblock %}
+
+{% block navbar %}
+		<li><a href="{{ path("app_main_page_principal") }}">Accueil</a></li>
+{% endblock %}
+
+{% block body %}
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+              <div class="card mb-3">
+                <div class="card-body p-3">
+                <div class="alert alert-info  alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Message</h4>
+                    <p>Votre message a été envoyez avec succes. Nous vous contacterons si bésoin. Merci!!!</p>
+                    <hr>
+                    <div class="mb-3">
+                        <p class="mb-0">Retour a la page d'accueil <a href="{{ path("app_main_page_principal") }}" class="btn btn-outline-success btn-sm">Revenir</a>.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+    </section>
+{% endblock %}

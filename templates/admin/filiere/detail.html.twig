@@ -1,0 +1,40 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail de la filière {{ filiere.nom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail de la filière <strong>{{ filiere.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_filiere_liste", {"idDepartement": departement.id}) }}" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+		<div class="contenu">
+			<div class="row">
+				<div class="col-lg-6 mb-3">
+					<div class="card p-3">
+						<h3>Nom de la filiere : <strong>{{filiere.nom}}</strong></h3>
+						<h3><br> Nom de son département: <strong>{{filiere.departement.nom}}</strong></h3>
+						<h3><br>Date d'ajout : <strong>{{filiere.dateCreation|date("j/m/y")}}</strong></h3>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="card p-3">
+					<div><h3><strong>Option de gestion</strong> </h3></div>
+						<div class="card p-3">
+							<div><br><a href="{{ path("app_admin_filiere_edition", {"idDepartement": departement.id, "idFiliere": filiere.id }) }}" class="btn btn-secondary btn-lg"><i class="mdi mdi-grease-pencil"></i>Modifier la filière</a></div>
+							<div><a href="{{ path("app_admin_filiere_suppression", {"idDepartement": departement.id,"idFiliere": filiere.id }) }}" onclick="return confirm('Etes vous sûr de vouloir supprimer cette filière ?')" class="btn btn-danger btn-lg"><i class="mdi mdi-cup "></i>Supprimer la filière</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+{% endblock %}

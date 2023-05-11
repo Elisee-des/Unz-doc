@@ -1,0 +1,58 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail de l'editeur {{ editeur.nomPrenom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail de l'editeur <strong>{{ editeur.nomPrenom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_roles_editeur_edition", {"idEditeur": editeur.id}) }}" title="Cliquez ici pour editer l'editeur" class="btn btn-info align-items-center">
+			<i class="mdi mdi-arrow-all"></i>
+			Editer</a>
+      	<a href="{{ path("app_admin_roles_editeur_suppression", {"idEditeur": editeur.id}) }}" title="Cliquez ici pour supprimer l'editeur" onclick="return confirm('Etes vous sûr de vouloir supprimer cet editeur ?')" class="btn btn-danger align-items-center">
+			<i class="mdi mdi-arrow-all"></i>
+			Supprimer</a>
+      	<a href="{{ path("app_admin_roles_user_bani", {"idUser": editeur.id}) }}" title="Cliquez ici pour banir cet utilisateur" onclick="return confirm('Etes vous sûr de vouloir banir cette utilisateur ? Il ne pourra plus accéder a son compte UNZ-DOC')" class="btn btn-warning align-items-center">
+			<i class="mdi mdi-account-remove "></i>
+			Banir</a>
+      <a href="{{ path("app_admin_roles_editeur_liste") }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all"></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                          <div class="card-body">
+                          <h4 class="card-title"> </h4>
+                            {# <h5 class="card-title">{{examen.status}}</h5> #}
+
+                            <!-- List group With Icons -->
+                            <ul class="list-group">
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Nom Prénom: {{ editeur.nomPrenom }}</li>
+                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>numéro de téléphone: {{editeur.numero}} </li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Email: {{editeur.email}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Ine: {{editeur.ine}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Mot secret: {{editeur.motSecret}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>promotion: {{editeur.annee}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Date d'inscription: {{editeur.dateCreation|date("j/m/y")}}</li>
+                              {% if editeur.photo == 'rien' %}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Image: <img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" width="100px"></li>
+                              {% else %}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Image: <img src="{{ asset("fichiers/"~editeur.photo) }}" width="100px"> </li>
+                              {% endif %}
+                            </ul><!-- End List group With Icons -->
+
+                          </div>
+                        </div>
+					</div>
+					</div>
+				</div>
+
+{% endblock %}

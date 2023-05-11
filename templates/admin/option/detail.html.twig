@@ -1,0 +1,40 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail de l'option {{ option.nom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail de l'option <strong>{{ option.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+		<div class="contenu">
+			<div class="row">
+				<div class="col-lg-6 mb-3">
+					<div class="card p-3">
+						<h3>Nom de l'année universitaire : <strong>{{option.nom}}</strong></h3>
+						<h3><br> Nom de sa Licence: <strong>{{option.licence.nom}}</strong></h3>
+						<h3><br>Date d'ajout : <strong>{{option.dateCreation|date("j/m/y")}}</strong></h3>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="card p-3">
+					<div><h3><strong>Option de gestion</strong> </h3></div>
+						<div class="card p-3">
+							<div><br><a href="{{ path("app_admin_option_edition", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idoption": option.id }) }}" title="Cliquez ici pour modifier cette option" class="btn btn-secondary btn-lg"><i class="mdi mdi-grease-pencil"></i>Modifier l'option</a></div>
+						<div><a href="{{ path("app_admin_option_suppression", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id }) }}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet option ?')" title="Cliquez ici pour supprimer cette option" class="btn btn-danger btn-lg"><i class="mdi mdi-cup "></i>Supprimer l'option</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+{% endblock %}

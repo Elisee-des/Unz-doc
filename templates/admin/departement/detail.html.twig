@@ -1,0 +1,39 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail du departement {{ departement.nom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail du departement <strong>{{ departement.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_departement_liste") }}" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+		<div class="contenu">
+			<div class="row">
+				<div class="col-lg-6 mb-3">
+					<div class="card p-3">
+							<h3>Nom du departement : <strong>{{departement.nom}}</strong></h3>
+						<h3><br>Date d'ajout : <strong>{{departement.dateCreation|date("j/m/y")}}</strong></h3>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="card p-3">
+					<h3><Strong>Option de gestion</Strong></h3>
+						<div class="card p-3">
+							<div><a href="{{ path("app_admin_departement_edition", {"idDepartement": departement.id }) }}" class="btn btn-secondary btn-lg"><i class="mdi mdi-grease-pencil"></i>Modifier le departement</a></div>
+						<div><a href="{{ path("app_admin_departement_suppression", {"idDepartement": departement.id }) }}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet departement ?')" class="btn btn-danger btn-lg"><i class="mdi mdi-cup "></i>Supprimer le departement</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+{% endblock %}

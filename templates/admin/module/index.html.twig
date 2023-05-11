@@ -1,0 +1,55 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Liste des modules de l'année {{ annee.nom }}
+{% endblock %}
+
+{% block titre %}
+	Liste des modules de l'année <strong>{{ annee.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+<a href="{{ path("app_admin_module_ajout", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un module">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter un module
+    </a>
+	<a href="{{ path("app_admin_annee_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id,}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un module">
+		<i class="mdi mdi-reply-all  "></i>Retour
+    </a>
+{% endblock %}
+
+{% block body %}
+	
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <div class="table-responsive">
+                  {% if modules == NULL %}
+                    <h3 class="text-center"><strong>Aucun module pour le moment.</strong></h3>
+                  {% else %}
+                  <table class="table table">
+                      <thead>
+                        <tr>
+                          <th>Modules</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for module in modules %}
+                        <tr>
+                          <td><strong>{{ module.nom }}</strong></td>
+                          <td>
+                            <a href="{{ path("app_admin_module_detail", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id }) }}" title="Cliquez ici pour voir les détails cette module" class="btn btn-outline-dark">Détails</a>
+                            <a href="{{ path("app_admin_examen_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id }) }}" class="btn btn-outline-primary">Examens</a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                  {% endif %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

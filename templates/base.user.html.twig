@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+
+		<link rel="stylesheet" href="{{ asset("doc/assets/css/bootstrap.css") }}">
+
+		<link rel="stylesheet" href="{{ asset("doc/assets/vendors/chartjs/Chart.min.css") }}">
+
+		<link rel="stylesheet" href="{{ asset("doc/assets/vendors/perfect-scrollbar/perfect-scrollbar.css") }}">
+		<link rel="stylesheet" href="{{ asset("doc/assets/css/app.css") }}">
+		<link rel="shortcut icon" href="{{ asset("doc/assets/images/favicon.svg") }}" type="image/x-icon">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+	</head>
+	<body>
+		<div id="app">
+			<div id="sidebar" class='active'>
+				<div class="sidebar-wrapper active">
+					<div class="sidebar-header">
+						{# <img src="{{ asset("doc/assets/images/logo.svg") }}" alt="" srcset=""> #}
+						<a href="{{ path("app_user_dashboard") }}">UNZ-DOC</a><hr>
+					</div>
+					<div class="sidebar-menu">
+						<ul class="menu">
+							<li class='sidebar-title'>Navigation</li>
+							<li class="sidebar-item {{ activeTwigUser(["app_user_dashboard", "app_user_parametre_edition_image", "app_user_parametre_edition_password", "app_user_parametre_edition_profil", "app_user_parametre_edition_mot_secret"]) }} ">
+								<a href="{{ path("app_user_dashboard") }}" class='sidebar-link'>
+									<i data-feather="layout" width="20"></i>
+									<span><strong>Tableau de bord</strong></span>
+								</a>
+
+							</li>
+							{#--------------------------------------------#}
+
+							<li class="sidebar-item">
+								<a href="{{ path("app_main_page_principal") }}" class='sidebar-link'>
+									<i data-feather="home" width="20"></i>
+									<span><strong>Accueil du site</strong></span>
+								</a>
+
+							</li>
+							{#--------------------------------------------#}
+
+							<li class="sidebar-item {{ activeTwigUser(["app_user_document_departement_liste",
+							 "app_user_document_filiere_liste", "app_user_document_licence_liste", "app_user_document_option_liste",
+							  "app_user_document_annee_liste", "app_user_document_module_liste", "app_user_document_examen_liste", "app_user_document_proposition_examen"]) }}">
+								<a href="{{ path("app_user_document_departement_liste") }}" class='sidebar-link'>
+									<i data-feather="layers" width="20"></i></i>
+									<span><strong>Documents</strong></span>
+								</a>
+
+							</li>
+
+							{#--------------------------------------------#}
+
+							<li class="sidebar-item {{ activeTwigUser(["app_user_recherche_main"]) }}">
+								<a href="{{ path("app_user_recherche_main") }}" class='sidebar-link'>
+									<i data-feather="layers" width="20"></i></i>
+									<span><strong>Recherche</strong></span>
+								</a>
+
+							</li>
+
+							{#--------------------------------------------#}		
+							<li class="sidebar-item {{ activeTwigUser([""]) }}">
+								<a  class='sidebar-link'>
+									<i data-feather="file-text" width="20"></i> 
+									<span><strong>Bon à savoir</strong></span>
+								</a>
+
+							</li>
+
+							{#--------------------------------------------#}		
+
+							{# <li class="sidebar-item {{ activeTwigUser(["app_user_remerciement"]) }}">
+								<a href="{{ path("app_user_remerciement_liste") }}" class='sidebar-link'>
+									<i data-feather="alert-circle" width="20"></i> 
+									<span><strong>Rémerciements</strong></span>
+								</a>
+
+							</li> #}
+							{#--------------------------------------------#}
+
+							<li class="sidebar-item ">
+								<a href="{{ path("app_logout") }}" class='sidebar-link'>
+									<i data-feather="user" width="20"></i></i>
+									<span><strong>Déconnexion</strong></span>
+								</a>
+
+							</li>
+
+
+						</ul>
+					</div>
+					<button class="sidebar-toggler btn x">
+						<i data-feather="x"></i>
+					</button>
+				</div>
+			</div>
+			    <div id="main">
+				<nav class="navbar navbar-header navbar-expand navbar-light">
+					<button class="sidebar-toggler" >
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav d-flex align-items-center navbar-light ml-auto">
+							<li class="dropdown">
+								<div>
+									<a href="{{ path("app_user_document_departement_liste") }}" class="btn icon icon-left btn-primary">
+										Document</a>
+								</div>
+								<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+									<div class="avatar mr-1">
+										{% if app.user.photo != 'rien' %}
+										<img src="{{ asset("fichiers/"~app.user.photo) }}" class="d-block w-100" width="159px">
+										{% else %}
+										<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" class="d-block w-100" width="159px">
+										{% endif %}
+									</div>
+									<div class="d-none d-md-block d-lg-inline-block">{{app.user.nomPrenom}}</div>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a class="dropdown-item" href="{{ path("app_user_dashboard") }}">
+										<i data-feather="settings"></i>
+										Tableau de bord</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{ path("app_logout") }}">
+										<i data-feather="log-out"></i>
+										Déconnexion</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+
+				<div class="main-content container-fluid">
+                        <div class="page-title">
+						<div class="container">
+							{# <h4 class="text-subtite text-muted float-right"> {% block description %}{% endblock %} #}
+							{# <h3 style="text-indent: 20px"> #}
+							{# <h4>
+								<strong>{% block titre %}{% endblock %}</strong>
+							</h4><br>
+								</h4> #}
+							</div>
+							<section class="section"> {% block body %}{% endblock %}
+								</section>
+							</div>
+						</div>
+						<footer>
+							<div class="footer clearfix mb-0 text-muted">
+								<div class="float-left">
+									<p>@2023 année de création</p>
+								</div>
+								{# <div class="float-right">
+									<p>Developper
+										<span class='text-danger'>
+											<i data-feather="heart"></i>
+										</span>
+										par
+										<a href="">Sabidani</a>
+									</p>
+								</div> #}
+							</div>
+						</footer>
+					</div>
+                    </div>
+				</div>
+				</div>
+				{% block javacript %}
+					
+				{% endblock %}
+				<script src="{{ asset("doc/assets/js/feather-icons/feather.min.js") }}"></script>
+				<script src="{{ asset("doc/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js") }}"></script>
+				<script src="{{ asset("doc/assets/js/app.js") }}"></script>
+				<script src="{{ asset("doc/assets/vendors/chartjs/Chart.min.js") }}"></script>
+				<script src="{{ asset("doc/assets/vendors/apexcharts/apexcharts.min.js") }}"></script>
+				<script src="{{ asset("doc/assets/js/pages/dashboard.js") }}"></script>
+				<script src="{{ asset("doc/assets/js/main.js") }}"></script>
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+				<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+				<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+				<script>
+					$(document).ready(function () {
+
+						$('#example').DataTable();
+					});
+				</script>
+				<script>
+				$(document).ready(function () {
+
+					$(".btn-actions").click(function (e) {
+						e.preventDefault()
+						$("#modale").modal("show")
+						let url = $(this).attr("href")
+						$('#modale-body').load(url);
+						});
+					})
+
+				{% for message in app.flashes("success") %}
+					Swal.fire({
+						"icon":"success",
+						"title":"Success",
+						"text":"{{ message }}"
+					})
+				{% endfor %}
+				{% for message in app.flashes("error") %}
+					Swal.fire({
+						"icon":"error",
+						"title":"Erreur",
+						"text":"{{ message }}"
+					})
+				{% endfor %}
+				</script>
+
+		{% block javascript %}
+	
+		{% endblock %}
+			</body>
+		</html>

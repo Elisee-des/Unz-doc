@@ -1,0 +1,53 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Liste des Supers Administrateurs de unz-doc
+{% endblock %}
+
+{% block titre %}
+	Liste de tous les Administrateurs de unz-doc
+{% endblock %}
+
+{% block boutons %}
+
+{% endblock %}
+
+{% block body %}
+            <div>
+                <p>
+                    IMPORTANT: <strong>Un super administrateur a le pour  d'ajouter ou banir un etudiant,
+                    un editeur(chef de promotion) ou un administrateur. Il est le seul a pouvoir faire
+                    passé un etudiant à editeur ou administrateur. Il peut supprimer un examen ou une
+                    correction. il a le pouvoir absolu sur unz-doc. Cependant <em>le créateur</em> 
+                    de unz-doc peut banir un super administrateur.</strong>
+                </p>
+            </div>
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <div class="table-responsive">
+                    <table class="table table">
+                      <thead>
+                        <tr>
+                          <th>Nom Prénom</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for superAdmin in superAdmins %}
+                        <tr>
+                          <td><strong>{{ superAdmin.nomPrenom }}</strong></td>
+                          <td>
+                            <a href="{{ path("app_admin_roles_super_admin_detail", {"idSuperAdmin": superAdmin.id}) }}" class="btn btn-outline-dark">Détails</a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

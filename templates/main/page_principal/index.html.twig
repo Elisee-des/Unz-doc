@@ -1,0 +1,177 @@
+{% extends 'base.main.html.twig' %}
+
+{% block title %}
+	Page d' accueil
+{% endblock %}
+
+{% block navbar %}
+		<li><a href="#hero">Accueil</a></li>
+		<li><a href="#important">Important</a></li>
+		<li><a href="#gallery">Filières</a></li>
+		<li><a href="#contact">Contact</a></li>
+{% endblock %}
+
+{% block intro %}
+          <h4 data-aos="fade-up">Bienvenu sur UNZ-DOC<br></h4>
+          <p data-aos="fade-up" data-aos-delay="100">Vous pouvez trouvez et telecharger les sujets et corrigés des anneés anterieurs de notre chère Université Norbert Zongo dans cette plateforme</p>
+          <h5 data-aos="fade-up" data-aos-delay="100">Vous devez vous inscrire ou vous connecter a fin de pouvoir telecharger les sujets et corrections</h5>
+          <div class="d-flex" data-aos="fade-up" data-aos-delay="200"><br>
+
+          {% if is_granted("ROLE_ETUDIANT") %}
+          <a href="{{ path("app_user_dashboard") }}" class="btn-book-a-table">Aller dans mon compte</a>
+          <a href="{{ path("app_logout") }}" class="btn-book-a-table">Se déconnecter</a>
+          {% elseif is_granted("ROLE_ADMIN") %}
+          <a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Aller dans mon compte</a>
+          <a href="{{ path("app_logout") }}" class="btn-book-a-table">Se déconnecter</a>
+          {% elseif is_granted("ROLE_EDITEUR") %}
+          <a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Aller dans mon compte</a>
+          <a href="{{ path("app_logout") }}" class="btn-book-a-table">Se déconnecter</a>
+          {% elseif is_granted("ROLE_SUPER_ADMIN") %}
+          <a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Aller dans mon compte</a>
+          <a href="{{ path("app_logout") }}" class="btn-book-a-table">Se déconnecter</a>
+          {% else %}
+              <a href="{{ path("app_register") }}" class="btn-book-a-table">Inscription</a>
+              <a href="{{ path("app_login") }}" class="btn-book-a-table">Connexion</a>
+          {% endif %}
+          </div>
+{% endblock %}
+
+
+{% block body %}
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="important" class="why-us about">
+      <div class="container" data-aos="fade-up">
+              <div class="section-header">
+          <h2>A votre attention</h2>
+          <p><span>Important </span>à savoir</p>
+        </div>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="why-box">
+              <h3>Pourqoui UNZ-DOC ?</h3>
+              <p>
+                UNZ-DOCUMENT (UNZ-DOC) a été developpé dans l'objectif d'aider nos frères et soeurs etdudiants dans la préparation de leurs examens.
+                Dans cette plateforme, les documents(sujets et corrigés) sont classés en fonction des départements,des filières, de la licence, de l'anneé accademique, et des modules.
+              </p>
+            </div>
+          </div><!-- End Why Box -->
+
+          <div class="col-lg-8 d-flex align-items-center">
+            <div class="row gy-4">
+
+              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-clipboard-data"></i>
+                  <h4>Autorisation</h4>
+                  <p>Toutes les sujets et corriger fugurant sur cette plateforme sont passé par l'approbation des chaque UFR conserné</p>
+                </div>
+              </div><!-- End Icon Box -->
+
+              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-gem"></i>
+                  <h4>Archives</h4>
+                  <p>Les sujets et corriges sont celle proposser par les docteurs eux-meme</p>
+                </div>
+              </div><!-- End Icon Box -->
+
+              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-inboxes"></i>
+                  <h4>Format fichier</h4>
+                  <p>Les sujets et corrigés sur cette plateforme sont tous sous format pdf.</p>
+                </div>
+              </div><!-- End Icon Box -->
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Filiéres</h2>
+          <p>Anciens sujets et corrigés de ces <span>filiéres</span></p>
+        </div>
+
+        <div class="gallery-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><a href="" class="btn btn-outline-success" title="Cliquez pour voir les anciens sujets et corrigés">MPCI</a></div>
+            <div class="swiper-slide"><a href="" class="btn btn-outline-success" title="Cliquez pour voir les anciens sujets et corrigés">SVT</a></div>
+            <div class="swiper-slide"><a href="" class="btn btn-outline-success" title="Cliquez pour voir les anciens sujets et corrigés">SEG</a></div>
+            <div class="swiper-slide"><a href="" class="btn btn-outline-success" title="Cliquez pour voir les anciens sujets et corrigés">HA</a></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Contact</h2>
+          <p>Avez-vous besoin d'aide ? <span>Contacter nous</span></p>
+        </div>
+
+        <div class="row gy-4">
+
+          <div class="col-md-6">
+            <div class="info-item d-flex align-items-center">
+              <i class="icon bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Par email</h3>
+                <p>contact@example.com</p>
+              </div>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-md-6">
+            <div class="info-item  d-flex align-items-center">
+              <i class="icon bi bi-telephone flex-shrink-0"></i>
+              <div>
+                <h3>Par SMS, par appel et par WhatsApp</h3>
+                <a href="{{ path("app_main_liste_contact") }}" title="Cliquez ici pour voir la liste des administrateurs">Voir la liste des contacts</a>
+              </div>
+            </div>
+          </div><!-- End Info Item -->
+        </div>
+
+        <form action="{{path("app_main_message")}}" method="post" role="form" class="php-email-form p-3 p-md-4">
+          <div class="row">
+            <div class="col-xl-6 form-group">
+              <input type="text" name="nomPrenom" class="form-control" id="name" placeholder="Votre Nom Prenom" required>
+            </div>
+            <div class="col-xl-6 form-group">
+              <input type="email" class="form-control" name="numero" id="email" placeholder="Votre Email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="sujet" id="subject" placeholder="Sujet" required>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="message" rows="5" placeholder="Votre Message" required></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-success" name="contact_message" onclick="return confirm('Voulez-vous coontinuer l'envoie de votre message ?')" value="Envoyez">
+          </div>
+          {# <div class="text-center"><button type="submit">Envoyez</button></div> #}
+        </form>
+        <!--End Contact Form -->
+
+      </div>
+    </section><!-- End Contact Section -->
+
+{% endblock %}

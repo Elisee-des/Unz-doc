@@ -1,0 +1,23 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Edition de l'etudiant {{ editeur.nomPrenom }}
+{% endblock %}
+
+{% block titre %}
+	Edition de l'etudiant {{ editeur.nomPrenom }}<strong></strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_roles_editeur_detail", {"idEditeur": editeur.id}) }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all"></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="card p-3">
+		{{ form(formEditeur) }}
+	</div>
+
+{% endblock %}

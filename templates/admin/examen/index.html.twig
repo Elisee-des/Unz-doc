@@ -1,0 +1,103 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Examens de  {{ module.nom }}
+{% endblock %}
+
+{% block titre %}
+	Examens de  <strong>{{ module.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+<a href="{{ path("app_admin_correction_ajout", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter une correction">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter une correction
+    </a>
+<a href="{{ path("app_admin_examen_ajout", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un examen">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter un examen
+    </a>
+	<a href="{{ path("app_admin_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour retourner">
+		<i class="mdi mdi-reply-all  "></i>Retour
+    </a>
+{% endblock %}
+
+{% block body %}
+	
+                  <h4 class="text-center"><strong>Examens</strong></h4>
+                <div class="table-responsive">
+                  {% if examens == NULL %}
+                  <h4 class="text-center"><strong>Aucun examen pour le moment.</strong></h4>
+                  {% else %}
+                      {% for examen in examens %}
+                          <div class="card mb-3">
+                          <div class="card-body">
+                          <h4 class="card-title">{{examen.nom}} </h4>
+                            <ul class="list-group">
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Nom du module: {{ module.nom }}</li>
+                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>Filière: {{filiere.nom}} </li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Année accademique: {{annee.nom}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Remarque: {% if examen.remarque == '' %}
+                                <p>Aucune remarque</p>
+                                {% else %}
+                                {{examen.remarque}}
+                              {% endif %}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Taille du fichier: {{examen.taille_fichier}}</li>
+                              <li class="list-group-item"><i class="bi bi-exclamation-octagon me-1 text-warning"></i>Date d'ajout: {{examen.date_creation}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>{% if examen.fichier =="aucunFichier" %} <p>Aucun fichier</p>
+                                {% else %}
+                                <a href="{{ path("app_admin_examen_telecharger", {"idExamen": examen.id}) }}" 
+                              class="btn btn-outline-danger">Télecharger le fichier</a>
+                              {% endif %}</li>
+                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i><a href="{{ path("app_admin_examen_edition", {"idDepartement": departement.id,
+                               "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id, "idExamen": examen.id }) }}" 
+                               class="btn btn-outline-primary btn btn-sm">Editer</a><a href="{{ path("app_admin_examen_suppression", {"idDepartement": departement.id,
+                               "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id, "idExamen": examen.id }) }}" class="btn btn-danger btn-sm"  onclick="return confirm('Etes vous sûr de vouloir supprimer cet fichier ?')">Supprimer</a></li>
+                            </ul>
+                          </div>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
+                </div>
+
+                  <hr>
+                  <h4 class="text-center"><strong>Corrections</strong></h4>
+                  <div class="table-responsive">
+                  {% if corrections == NULL %}
+                    <h4 class="text-center"><strong>Aucune correction pour le moment.</strong></h4>
+                  {% else %}
+                      {% for correction in corrections %}
+                          <div class="card mb-3">
+                          <div class="card-body">
+                          <h4 class="card-title">{{correction.nom}} </h4>
+                            {# <h5 class="card-title">{{examen.status}}</h5> #}
+
+                            <!-- List group With Icons -->
+                            <ul class="list-group">
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Nom du module: {{ module.nom }}</li>
+                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>Filière: {{filiere.nom}} </li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Année accademique: {{annee.nom}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Remarque: {% if correction.remarque == '' %}
+                                <p>Aucune remarque</p>
+                                {% else %}
+                                {{correction.remarque}}
+                              {% endif %}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Taille du fichier: {{correction.taille_fichier}}</li>
+                              <li class="list-group-item"><i class="bi bi-exclamation-octagon me-1 text-warning"></i>Date d'ajout: {{correction.date_creation}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>{% if correction.fichier =="aucunFichier" %} <p>Aucun fichier</p>
+                                {% else %}
+                                <a href="{{ path("app_admin_correction_telecharger", {"idCorrection": correction.id}) }}" 
+                              class="btn btn-outline-danger">Télecharger le fichier</a>
+                              {% endif %}</li>
+                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i><a href="{{ path("app_admin_correction_edition", {"idDepartement": departement.id,
+                               "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id, "idCorrection": correction.id }) }}" 
+                               class="btn btn-outline-primary btn btn-sm">Editer</a><a href="{{ path("app_admin_correction_suppression", {"idDepartement": departement.id,
+                               "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id, "idCorrection": correction.id }) }}" class="btn btn-danger btn-sm"  onclick="return confirm('Etes vous sûr de vouloir supprimer cet fichier ?')">Supprimer</a></li>
+                               
+                            </ul><!-- End List group With Icons -->
+
+                          </div>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
+                  </div>
+
+{% endblock %}

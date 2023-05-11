@@ -1,0 +1,47 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail du Super Admin  {{ superAdmin.nomPrenom }} 
+{% endblock %}
+
+{% block titre %}
+	Detail du Super Admin  <strong>{{ superAdmin.nomPrenom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+
+{% endblock %}
+
+{% block body %}
+
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                          <div class="card-body">
+                          <h4 class="card-title"> </h4>
+                            {# <h5 class="card-title">{{examen.status}}</h5> #}
+
+                            <!-- List group With Icons -->
+                            <ul class="list-group">
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Nom Prénom: {{ superAdmin.nomPrenom }}</li>
+                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>numéro de téléphone: {{superAdmin.numero}} </li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Email: {{superAdmin.email}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Ine: {{superAdmin.ine}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Mot secret: {{superAdmin.motSecret}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>promotion: {{superAdmin.annee}}</li>
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Date d'inscription: {{superAdmin.dateCreation|date("j/m/y")}}</li>
+                              {% if superAdmin.photo == 'rien' %}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Image: <img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" width="100px"></li>
+                              {% else %}
+                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Image: <img src="{{ asset("fichiers/"~superAdmin.photo) }}" width="100px"> </li>
+                              {% endif %}
+                            </ul><!-- End List group With Icons -->
+
+                          </div>
+                        </div>
+					</div>
+					</div>
+				</div>
+
+{% endblock %}

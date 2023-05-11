@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		<!-- plugins:css -->
+		<link rel="stylesheet" href="{{ asset("asset/vendors/feather/feather.css") }}">
+		<link rel="stylesheet" href="{{ asset("asset/vendors/mdi/css/materialdesignicons.min.css") }}">
+		<link rel="stylesheet" href="{{ asset("asset/vendors/ti-icons/css/themify-icons.css") }}">
+		<link rel="stylesheet" href="{{ asset("asset/vendors/typicons/typicons.css") }}">
+		<link rel="stylesheet" href="{{ asset("asset/vendors/simple-line-icons/css/simple-line-icons.css") }}">
+		<link rel="stylesheet" href="{{ asset("asset/vendors/css/vendor.bundle.base.css") }}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+		<!-- endinject -->
+		<!-- Plugin css for this page -->
+		<link rel="stylesheet" href="{{ asset("asset/vendors/datatables.net-bs4/dataTables.bootstrap4.css") }}"> <link rel="stylesheet" href="{{ asset("asset/js/select.dataTables.min.css") }}">
+		<!-- End plugin css for this page -->
+		<!-- inject:css -->
+		<link
+		rel="stylesheet" href="{{ asset("asset/css/vertical-layout-light/style.css") }}"> <!-- endinject -->
+		<link rel="shortcut icon" href="{{ asset("asset/images/favicon.png") }}"/>
+
+	</head>
+	<body>
+		<div
+			class="container-scroller">
+			<!-- partial:partials/_navbar.html -->
+			<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+					<div class="me-3">
+						<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+							<span class="icon-menu"></span>
+						</button>
+					</div>
+					<div>
+						<a class="navbar-brand brand-logo" href="index.html">
+							<img src="{{ asset("asset/images/logo.svg") }}" alt="logo"/>
+						</a>
+						<a class="navbar-brand brand-logo-mini" href="index.html">
+							<img src="{{ asset("asset/images/logo-mini.svg") }}" alt="logo"/>
+						</a>
+					</div>
+				</div>
+				<div class="navbar-menu-wrapper d-flex align-items-top">
+					<ul class="navbar-nav">
+						<li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
+							<h1 class="welcome-text">Bonjour,
+								<span class="text-black fw-bold">{{app.user.nomPrenom}}</span>
+							</h1>
+							<h3 class="welcome-sub-text">Vous êtes un administrateur de la plateforme unz-doc
+							</h3>
+						</li>
+					</ul>
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item d-none d-lg-block">
+							<div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
+								<span class="input-group-addon input-group-prepend border-right">
+									<span class="icon-calendar input-group-text calendar-icon"></span>
+								</span>
+								<input type="text" class="form-control">
+							</div>
+						</li>
+
+						<li class="nav-item dropdown d-none d-lg-block user-dropdown">
+							<a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+								{% if app.user.photo != 'rien' %}
+									<img src="{{ asset("fichiers/"~app.user.photo) }}" width="60px">
+								{% else %}
+									<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" width="60px">
+								{% endif %}
+							</a>
+							<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+								<div class="dropdown-header text-center">
+									{% if app.user.photo != 'rien' %}
+										<img src="{{ asset("fichiers/"~app.user.photo) }}" width="60px">
+									{% else %}
+										<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" width="60px">
+									{% endif %}
+									<p class="mb-1 mt-3 font-weight-semibold">{{app.user.nomPrenom}}</p>
+									{% if app.user.email != '' %}
+										<p class="fw-light text-muted mb-0">{{app.user.email}}</p>
+									{% else %}
+										<p>Enregistrer votre email</p>
+									{% endif %}
+								</div>
+								<a class="dropdown-item">
+									<i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i>
+									My Profile
+									<span class="badge badge-pill badge-dange">1</span>
+								</a>
+								<a class="dropdown-item">
+									<i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i>
+									Mon profil</a>
+								<a class="dropdown-item">
+									<i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i>
+									Paramètre
+								</a>
+								<a class="dropdown-item">
+									<i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i>
+									Bon à savoir</a>
+								<a class="dropdown-item" href="{{ path("app_logout") }}">
+									<i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Déconnexion</a>
+							</div>
+						</li>
+					</ul>
+					<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
+						<span class="mdi mdi-menu"></span>
+					</button>
+				</div>
+			</nav>
+			<!-- partial -->
+			<div class="container-fluid page-body-wrapper">
+				<!-- partial -->
+				<!-- partial:partials/_sidebar.html -->
+				<nav class="sidebar sidebar-offcanvas" id="sidebar">
+					<ul class="nav">
+						<li class="nav-item {{ activeTwigAdmin([" app_admin_dashboard"]) }}">
+							<a class="nav-link" href="{{ path("app_admin_dashboard")}}">
+								<i class="mdi mdi-grid-large menu-icon"></i>
+								<span class="menu-title">Tableau de bord</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path("app_main_page_principal")}}">
+								<i class="mdi mdi-equal-box menu-icon"></i>
+								<span class="menu-title">Accueil du site</span>
+							</a>
+						</li>
+						<li class="nav-item {{ activeTwigAdmin([" app_admin_message"]) }}">
+							<a class="nav-link" href="{{ path("app_admin_message")}}">
+								<i class=" mdi mdi-comment-account menu-icon"></i>
+								<span class="menu-title">Messages</span>
+							</a>
+						</li>
+						<li class="nav-item nav-category">Administration</li>
+						<li class="nav-item">
+							<a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+								<i class="menu-icon mdi mdi-floor-plan"></i>
+								<span class="menu-title">Gestion du site</span>
+								<i class="menu-arrow"></i>
+							</a>
+							<div class="collapse" id="ui-basic">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item {{ activeTwigAdmin([" app_admin_departement_liste", " app_admin_departement_detail", " app_admin_departement_ajout"]) }}">
+										<a class="nav-link" href="{{ path("app_admin_departement_liste") }}">Documents</a>
+									</li>
+									<li class="nav-item {{ activeTwigAdmin([" app_admin_departement_liste", " app_admin_departement_detail", " app_admin_departement_ajout"]) }}">
+										<a class="nav-link" href="{{ path("app_admin_proposition") }}">Propositions</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item nav-category">Gestion utilisateur</li>
+						<li class="nav-item">
+							<a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+								<i class="menu-icon mdi mdi-card-text-outline"></i>
+								<span class="menu-title">Gestion utilisateur</span>
+								<i class="menu-arrow"></i>
+							</a>
+							<div class="collapse" id="form-elements">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path("app_admin_roles_user_liste") }}">Tous les Utilisateurs</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path("app_admin_roles_etudiant_liste") }}">Etudiants</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path("app_admin_roles_editeur_liste") }}">Editeurs</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path("app_admin_roles_admin_liste") }}">Adminisateurs</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path("app_admin_roles_super_admin_liste") }}">Super Admin</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item nav-category">Personnel</li>
+						<li class="nav-item">
+							<a class="nav-link" data-bs-toggle="collapse" href="#personnel" aria-expanded="false" aria-controls="ui-basic">
+								<i class="menu-icon mdi mdi-floor-plan"></i>
+								<span class="menu-title">Mon compte</span>
+								<i class="menu-arrow"></i>
+							</a>
+							<div class="collapse" id="personnel">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item {{ activeTwigAdmin([" app_admin_compte_profil"]) }}">
+										<a class="nav-link" href="{{ path("app_admin_compte_profil") }}">Mon profil</a>
+									</li>
+									<li class="nav-item {{ activeTwigAdmin([" app_admin_compte_parametre_dashboard", " app_admin_compte_parametre_edition_du_profil", " app_admin_compte_parametre_edition_image"," app_admin_compte_parametre_edition_password"]) }}">
+										<a class="nav-link" href="{{ path("app_admin_compte_parametre_dashboard") }}">Mes parmètres</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="nav-item nav-category">Autres</li>
+						<li class="nav-item">
+							<a href="{{ path("app_admin_remerciement_liste") }}" class="nav-link">
+								<i class="menu-icon mdi mdi-group "></i>
+								<span class="menu-title">Remerciment</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link">
+								<i class="menu-icon mdi mdi-file-document"></i>
+								<span class="menu-title">Documentation</span>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path("app_logout") }}">
+								<i class="menu-icon mdi mdi-login"></i>
+								<span class="menu-title">Déconnexion</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+
+				<!-- partial -->
+				<div class="main-panel">
+					<div class="content-wrapper">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="home-tab">
+									<div class="d-sm-flex align-items-center justify-content-between border-bottom">
+											<ul class="nav nav-tabs" role="tablist">
+												<li class="nav-item">
+													<h4 class="mb-3"> {% block titre %}{% endblock %}
+													</h4>
+												</li>
+											</ul>
+												<div class="btn-wrapper"> {% block boutons %}{% endblock %}
+												</div>
+										</div>
+									</div>
+								</div>
+								{% block body %}{% endblock %}
+								<footer class="footer">
+									<div class="d-sm-flex justify-content-center justify-content-sm-between">
+										<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Unz-doc
+										</span>
+										<span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2023. Tout droit reservé.</span>
+									</div>
+								</footer>
+							</div>
+						</div>
+				</div>
+
+					<script src="{{ asset("asset/vendors/js/vendor.bundle.base.js") }}"></script>
+					<!-- endinject -->
+					<!-- Plugin js for this page -->
+					<script src="{{ asset("asset/vendors/chart.js/Chart.min.js") }}"></script>
+					<script src="{{ asset("asset/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js") }}"></script>
+					<script src="{{ asset("asset/vendors/progressbar.js/progressbar.min.js") }}"></script>
+
+					<!-- End plugin js for this page -->
+					<!-- inject:js -->
+					<script src="{{ asset("asset/js/off-canvas.js") }}"></script>
+					<script src="{{ asset("asset/js/hoverable-collapse.js") }}"></script>
+					<script src="{{ asset("asset/js/template.js") }}"></script>
+					<script src="{{ asset("asset/js/settings.js") }}"></script>
+					<script src="{{ asset("asset/js/todolist.js") }}"></script>
+					<!-- endinject -->
+					<!-- Custom js for this page-->
+					<script src="{{ asset("asset/js/dashboard.js") }}"></script>
+					<script src="{{ asset("asset/js/Chart.roundedBarCharts.js") }}"></script>
+					<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+					<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+					<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+					<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+					<script>
+						$(document).ready(function () {
+
+$('#example').DataTable();
+});
+					</script>
+					<script>
+						$(document).ready(function () {
+
+$(".btn-actions").click(function (e) {
+e.preventDefault()
+$("#modale").modal("show")
+let url = $(this).attr("href")
+$('#modale-body').load(url);
+});
+}){% for message in app.flashes("success") %}
+Swal.fire({"icon": "success", "title": "Success", "text":"{{ message }}", "timer": 30000}){% endfor %}
+
+{#{% for message in app.flashes("success") %}
+Swal.fire({"icon": "success", "title": "Success", "text":"{{ message }}"}){% endfor %}
+#}{% for message in app.flashes("error") %}
+Swal.fire({"icon": "error", "title": "Erreur", "text":"{{ message }}"}){% endfor %}
+					</script>
+					<!-- End custom js for this page-->
+				</body>
+
+			</html>

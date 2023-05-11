@@ -1,0 +1,50 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Proposition d'une correction du module: <strong>{{ module.nom }}</strong>
+{% endblock %}
+
+{% block titre %}
+	Proposition d'une correction du module: <strong>{{ module.nom }}</strong>
+{% endblock %}
+
+{% block description %}
+	<a href="{{ path("app_user_document_examen_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all"></i>
+			Retour</a>
+{% endblock %}
+
+{% block boutons %}
+{% endblock %}
+
+{% block body %}
+
+	<div class="card p-3">
+		{{ form(formPropositionCorrection) }}
+	</div>
+
+	<div>
+		<ul>
+			<li>Votre nom prénom et numéro sont automatiquement enregistré lorsque vouv proposer un sujet.</li>
+			<li>Assure que la correction dont vous proposé est bien celui de ce module (<strong>{{module.nom}}</strong>) et surtout est celui de l'anneé(<strong>{{module.annee.nom}}</strong>).</li>
+			<li>Après approbation des administrateurs, votre proposé va apparaitre officielement et la communauté pourra télécharger.</li>
+			<li> Il est aussi possible de proposé
+			une partie de la correction. si vous avez un contenu , une
+			correction trouver en ligne, ou dans une documentation qui
+			resous un problème se trouvant dans l'examen <em>"{{module.nom}}"</em>, vous pouvez
+			le proposé
+			</li>
+		</ul>
+	</div>
+	<hr>
+    <div>
+        <p>	<strong>Important:</strong>
+		Il est Interdit de proposé un TD(Travaux dirigé) quelconque.
+		UNZ-DOC est un plateforme reservé specialement aux anciens sujets et corrections. Après vérification,
+		si nous constatons que vous avez proposé une correction
+		qui n'ai pas du module "{{module.nom}}" vous serrez durement et simplement
+		banis de UNZ-DOC.
+        </p>
+    </div>
+
+{% endblock %}

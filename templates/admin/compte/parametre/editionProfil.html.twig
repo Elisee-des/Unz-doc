@@ -1,0 +1,24 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Edition des information de mon profil
+{% endblock %}
+
+{% block titre %}
+Edition des informations de mon profil
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_compte_parametre_dashboard") }}" class="btn btn-outline-primary align-items-center">
+		<i class="mdi mdi-arrow-left "></i>Retour
+	</a>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="card p-3">
+			{{ form(formEditionProfil) }}
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Detail de l'admin
+	{{ admin.nomPrenom }}
+{% endblock %}
+
+{% block titre %}
+	Detail de l'admin
+	<strong>{{ admin.nomPrenom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_roles_admin_edition", {"idAdmin": admin.id}) }}" title="Cliquez ici pour editer l'admin" class="btn btn-info align-items-center">
+		<i class="mdi mdi-arrow-all"></i>
+		Editer</a>
+	<a href="{{ path("app_admin_roles_admin_suppression", {"idAdmin": admin.id}) }}" title="Cliquez ici pour supprimer l'admin" onclick="return confirm('Etes vous sûr de vouloir supprimer cet admin ?')" class="btn btn-danger align-items-center">
+		<i class="mdi mdi-arrow-all"></i>
+		Supprimer</a>
+			<a href="{{ path("app_admin_roles_user_bani", {"idUser": admin.id}) }}" title="Cliquez ici pour banir cet utilisateur" onclick="return confirm('Etes vous sûr de vouloir banir cette utilisateur ? Il ne pourra plus accéder a son compte UNZ-DOC')" class="btn btn-warning align-items-center">
+			<i class="mdi mdi-account-remove "></i>
+			Banir</a>
+	<a href="{{ path("app_admin_roles_admin_liste") }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+		<i class="mdi mdi-reply-all"></i>
+		Retour</a>
+{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive">
+    <div class="card mb-3">
+      <div class="card-body">
+    <h4 class="text-center"><strong>Détail</strong></h4>
+      {# <h4 class="card-title">{{correction.nom}} </h4> #}
+        <ul class="list-group">
+          <li class="list-group-item"></i>Nom Prénom: {{ admin.nomPrenom }}</li>
+          <li class="list-group-item">numéro de téléphone:
+							{{admin.numero}}</li>
+          <li class="list-group-item">Email:
+							{{admin.email}}</li>
+          <li class="list-group-item">Ine:
+							{{admin.ine}}</li>
+          <li class="list-group-item">Mot secret:
+							{{admin.motSecret}}</li>
+              <li class="list-group-item">Mot secret:
+							{{admin.motSecret}}</li>
+              <li class="list-group-item">Promotion:
+							{{admin.annee}}</li>
+              <li class="list-group-item">Date d'inscription:
+							{{admin.dateCreation|date("j/m/y")}}</li>
+              {% if admin.photo == 'rien' %}
+							<li class="list-group-item">Image:
+								<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" width="100px"></li>
+						{% else %}
+							<li class="list-group-item">Image:
+								<img src="{{ asset("fichiers/"~admin.photo) }}" width="100px">
+							</li>
+						{% endif %}
+              <li class="list-group-item"></li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

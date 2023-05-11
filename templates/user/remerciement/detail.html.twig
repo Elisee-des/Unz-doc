@@ -1,0 +1,39 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Plus de détail sur {{ user.nomPrenom }}
+{% endblock %}
+
+{% block titre %}
+	Plus de détail sur <strong>{{ user.nomPrenom }}</strong>
+{% endblock %}
+
+{% block description %}
+	<a href="{{ path("app_user_remerciement_liste") }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+		<i class="mdi mdi-reply-all  "></i>
+	Retour</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="card mb-3">
+                          <div class="card-body">
+                          <h4 class="card-title"> </h4>
+                            {# <h5 class="card-title">{{examen.status}}</h5> #}
+
+                            <!-- List group With Icons -->
+                            <ul class="list-group">
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Nom Prénom: {{ user.nomPrenom }}</li>
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>numéro de téléphone: {{ user.numero }}</li>
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Email: {{ user.email }}</li>
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>INE: {{ user.ine }}</li>
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Filière: {{ user.filiere }}</li>
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Spécialité: {{ user.specialite }}</li>
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Promotion: {{ user.annee }}</li>
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Remerciement: {{ user.descriptionRemerciement }}</li>
+                            </ul><!-- End List group With Icons -->
+
+                          </div>
+                        </div>
+
+{% endblock %}

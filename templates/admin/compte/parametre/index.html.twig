@@ -1,0 +1,72 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Mes paramètres de compte
+{% endblock %}
+
+{% block titre %}
+	Paramètre de mon compte
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_compte_profil") }}" class="btn btn-outline-primary align-items-center">
+		<i class="mdi mdi-account-settings "></i>Mon profil
+    </a>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h4 class="mb-4">
+			<strong>Modifier les informations de mon compte</strong>
+		</h4>
+	</div>
+
+	<div class="container">
+		<div class="content">
+            <div class="row">
+                <div class="col-md-3 grid-margin grid-margin-md-0 stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Mon profil</h4>
+					<div class="containr">
+                        <a href="{{ path("app_admin_compte_parametre_edition_du_profil", {"id": app.user.id}) }}" class="btn btn-outline-primary"> Commencer l'édition de mon profil</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 grid-margin grid-margin-md-0 stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Mon image</h4>
+					<div class="containr">
+                        <a href="{{ path("app_admin_compte_parametre_edition_image", {"id": app.user.id}) }}" class="btn btn-outline-primary">Commencer l'édition mon image de profil</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 grid-margin grid-margin-md-0 stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Mon mot de passe</h4>
+					<div class="containr">
+                        <a href="{{ path("app_admin_compte_parametre_edition_password", {"id": app.user.id}) }}" class="btn btn-outline-primary">Commencer l'édition de mon mot de passe</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+
+        <div class="col-md-3 grid-margin grid-margin-md-0 stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Mon mot secret</h4>
+					<div class="containr">
+                        <a href="{{ path("app_admin_compte_parametre_edition_mot_secret", {"id": app.user.id}) }}" class="btn btn-outline-primary">Commencer l'édition de mon mot secret</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+            </div>
+        </div>
+	</div>
+
+{% endblock %}

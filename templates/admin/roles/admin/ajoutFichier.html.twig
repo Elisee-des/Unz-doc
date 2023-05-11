@@ -1,0 +1,23 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Ajout un fichier excel
+{% endblock %}
+
+{% block titre %}
+	Ajout un fichier excel (Admins)
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_roles_admin_liste") }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="card p-3">
+		{{ form(form) }}
+	</div>
+
+{% endblock %}

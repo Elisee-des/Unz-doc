@@ -1,0 +1,102 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Liste des modules de l'année
+	{{ annee.nom }}
+{% endblock %}
+
+{% block titre %}
+	Liste des modules de l'année
+	<strong>{{ annee.nom }}</strong>
+{% endblock %}
+
+{% block description %}
+	<a href="{{ path("app_user_document_annee_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id,}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un module">
+		<i class="mdi mdi-reply-all  "></i>Retour
+	</a>
+{% endblock %}
+
+{% block body %}
+
+	{# <div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title"></h4>
+				<div class="table-responsive">
+					{% if modules == NULL %}
+						<h4 class="text-center">
+							<strong>Aucun module pour le moment.</strong>
+						</h4>
+					{% else %}
+						<table id="example" class="table table-hover">
+							<thead>
+								<tr>
+									<th>Modules</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for module in modules %}
+									<tr>
+										<td>
+											<strong>{{ module.nom }}</strong>
+										</td>
+										<td>
+											<a href="{{ path("app_user_document_examen_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id }) }}" class="btn btn-outline-primary">Examens</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						{% endif %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div> #}
+
+
+	<div class="card">
+		<div class="card-header d-flex justify-content-between align-items-center">
+			<h4 class="card-title">Liste des Moudules
+			</h4>
+			<div class="d-flex ">
+				<a href="{{ path("app_user_document_annee_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id,}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un module">
+					<i class="mdi mdi-reply-all  "></i>Retour
+				</a>
+			</div>
+		</div>
+		<div class="card-body px-0 pb-0">
+			<div class="table-responsive">
+				<table class='table mb-0' id="table1">
+					{% if modules == NULL %}
+						<h5 class="text-center">
+							<strong>Aucun module pour le moment.</strong>
+						</h5>
+					{% else %}
+						<thead>
+							<tr>
+								<th>Modules</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								{% for module in modules %}
+									<tr>
+										<td>
+											<strong>{{ module.nom }}</strong>
+										</td>
+										<td>
+											<a href="{{ path("app_user_document_examen_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id }) }}" class="btn btn-outline-primary">Examens</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tr>
+						</tbody>
+					{% endif %}
+				</table>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.main.html.twig' %}
+
+{% block title %}
+	Récupération du mot de passe
+{% endblock %}
+
+{% block navbar %}
+		<li><a href="{{ path("app_main_page_principal") }}">Accueil</a></li>
+{% endblock %}
+
+{% block intro %}
+		<div class="card p-2">
+			<h2>Récupération du mot de passe</h2>
+
+			<div class="card p-2 input-numero">
+			<div class="card alert alert-success  alert-dismissible fade show">
+				Votre mot de passe sera changé et vous sera renvoyé par sms. NB: Pour une rapidité de reponse, nous vous conseillons de nous contacté par appel, sms ou par WhatsApp.
+				<div>Contacter un adminstrateur: <a href="{{ path("app_main_liste_contact") }}" class="btn btn-primary">Voir la liste</a></div>
+			</div>
+				{{ form(recuperationForm) }}
+				</div>
+				<div class="col-12 input-numero"><br>
+					<div class="card">
+						<p class="small center mb-0">J'ai n'es pas de compte
+							<a href="{{ path("app_register") }}">Inscription</a>
+						</p>
+						<p class="small center mb-0">J'ai déja un compte
+							<a href="{{ path("app_login") }}">Connexion</a>
+						</p>
+                      <p class="small center mb-0">Revenir a la page d'accueil <a href="{{ path("app_main_page_principal") }}">Retour</a></p>
+					</div>
+				</div>
+			</div>
+	{% endblock %}

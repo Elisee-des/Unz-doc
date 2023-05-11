@@ -1,0 +1,86 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Liste des départements
+{% endblock %}
+
+{% block titre %}
+	Liste des départements
+{% endblock %}
+
+{% block boutons %}
+	{# <a href="{{ path("app_admin_departement_ajout") }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un departement">
+			<i class="mdi mdi-arrow-all  "></i>Ajouter un departement
+	    </a> #}
+{% endblock %}
+
+{% block body %}
+
+	{# <div class="col-lg-12 grid-margin stretch-card">
+		<div class="card-body">
+			<h4 class="card-title"></h4>
+			<div class="table-responsive">
+				<table id="example" class="table table-hover">
+					<thead>
+						<tr>
+							<th>Départements</th>
+							<th></th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for departement in departements %}
+							<tr>
+								<td>
+									<strong>{{ departement.nom }}
+										({{ departement.filieres|length }})</strong>
+								</td>
+								<td>
+									<a href="{{ path("app_user_document_filiere_liste", {"idDepartement": departement.id}) }}" , class="btn btn-outline-primary">Filières</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div> #}
+
+	<div class="card">
+		<div class="card-header d-flex justify-content-between align-items-center">
+			<h4 class="card-title">Liste des départements </h4>
+			<div class="d-flex ">
+				{# <i data-feather="download"></i> #}
+			</div>
+		</div>
+		<div class="card-body px-0 pb-0">
+			<div class="table-responsive">
+				<table class='table mb-0' id="table1">
+					<thead>
+						<tr>
+							<th>Départements</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						{% for departement in departements %}
+							<tr>
+								<td>
+									<strong>{{ departement.nom }}
+										({{ departement.filieres|length }})</strong>
+								</td>
+								<td>
+									<a href="{{ path("app_user_document_filiere_liste", {"idDepartement": departement.id}) }}" , class="btn btn-outline-primary">Filières</a>
+								</td>
+							</tr>
+						{% endfor %}
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

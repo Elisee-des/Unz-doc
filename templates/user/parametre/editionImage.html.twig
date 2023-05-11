@@ -1,0 +1,53 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Modification de l'image du compte
+{% endblock %}
+
+{% block titre %}
+	Edition de l'image du compte
+{% endblock %}
+
+{% block description %}
+	Choisissez dans votre galérie une image dont la taille maximal est de 2Mo
+{% endblock %}
+
+{% block body %}
+
+	<section class="section profile">
+
+
+		<div class="row">
+
+				<div class="col-sm-12">
+				<div>
+					<h4>Mon image actuel :
+						<a href=""></a>
+					</h4>
+					<div class="content">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="card p-3">
+									{% if app.user.photo != 'rien' %}
+										<img src="{{ asset("fichiers/"~app.user.photo) }}" class="d-block w-100" width="159px">
+									{% else %}
+										<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" class="d-block w-100" width="159px">
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Material tab card end -->
+				</div>
+					<h4>Edition de l'image</h4>
+
+					<div class="card p-3">
+						{{ form(form) }}
+						</div>
+						<!-- Material tab card end -->
+					</div>
+				</div>
+
+			</div>
+		</section>
+	{% endblock %}

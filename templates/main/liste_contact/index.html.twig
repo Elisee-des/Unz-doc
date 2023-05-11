@@ -1,0 +1,59 @@
+{% extends 'base.main.html.twig' %}
+
+{% block title %}
+	Liste des contacts des administrateurs
+{% endblock %}
+
+{% block navbar %}
+	<li>
+		<a href="{{ path("app_main_page_principal") }}">Accueil</a>
+	</li>
+{% endblock %}
+
+{% block intro %}
+	<div
+		class="container">
+		{# <div class="card p-4"> #}
+		<h1>Contactez un administrateur en cas de besion</h1>
+		<a href="{{ path("app_main_page_principal") }}">Revenir a l'accueil</a>
+		{# </div> #}
+	{% endblock %}
+
+	{% block body %}
+
+
+		<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+			<div class="container">
+				<div class="row justify-content-center">
+					<h2 class="text-center">La liste de administrateurs</h2>
+					<div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+						<div class="card mb-3">
+							<div class="card-body p-3">
+								<table id="example" class="table table-based">
+									<thead>
+										<tr>
+											<th>Nom prénom</th>
+											<th>Numéro</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for admin in admins %}
+											<tr>
+												<td>
+													<strong>{{ admin.nomPrenom }}</strong>
+												</td>
+												<td>
+													<strong>{{ admin.numero }}</strong>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+		{% endblock %}

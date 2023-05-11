@@ -1,0 +1,70 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Liste des messages reçus
+{% endblock %}
+
+{% block titre %}
+	Liste des messages reçus
+{% endblock %}
+
+{% block body %}
+	<div class="card-body">
+		<h2 class="card-title">Liste des messages envoyé</h2>
+		{% if messages == NULL %}
+			<h2 class="text-center">Aucun message pour le moment</h2>
+		{% else %}
+		
+		{% for message in messages %}
+
+			<section class="section profile">
+				<div class="row">
+					<div class="col-xl-8">
+
+						<div class="card">
+							<div
+								class="card-body pt-3">
+								<!-- Bordered Tabs -->
+								<ul class="nav nav-tabs nav-tabs-bordered">
+									<li class="nav-item">
+										<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Message</button>
+									</li>
+								</ul>
+								<div class="tab-content pt-2">
+
+									<div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label ">Nom prénom</div>
+											<div class="col-lg-9 col-md-8">{{ message.nomPrenom }}</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Numéro</div>
+											<div class="col-lg-9 col-md-8">{{ message.numero }}</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Sujet</div>
+											<div class="col-lg-9 col-md-8">{{ message.sujet }}</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Message</div>
+											<div class="col-lg-9 col-md-8">{{ message.message }}</div>
+										</div>
+									</div>
+								</div>
+								<!-- End Bordered Tabs -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		{% endfor %}
+
+		{% endif %}
+
+	</div>
+
+{% endblock %}

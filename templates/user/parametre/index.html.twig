@@ -1,0 +1,318 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Tableau de bord
+{% endblock %}
+
+{% block titre %}
+	Bienvenu {{ app.user.nomPrenom }}
+{% endblock %}
+
+{% block description %}
+	<a href="{{ path("app_user_document_departement_liste") }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+		<i class="mdi mdi-reply-all"></i>Documents
+    </a>
+	{# Mon tableau de bord #}
+{% endblock %}
+
+{% block body %}
+
+	        {% for message in app.flashes('success') %}
+			<div class="alert alert-primary alert-dismissible fade show" role="alert">
+			<strong>{{message}}</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+        	{% endfor %}
+
+	<div
+		class="card-body">
+		{# <div class="card p-3"> #}
+		<div class="container">
+        {% for message in app.flashes('success') %}
+			<div class="alert alert-primary alert-dismissible fade show" role="alert">
+			<strong>{{message}}</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+        {% endfor %}
+
+			<div class="row">
+				<div class="col-md-12">
+
+
+
+					<h5 class="card-title"></h5>
+					{# <ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profil</a>
+						</li>
+						<li class="nav-item" role="presentation">
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Edition</a>
+						</li>
+						<li class="nav-item" role="presentation">
+							<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Image</a>
+						</li>
+						<li class="nav-item" role="presentation">
+							<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contactA" role="tab" aria-controls="contact" aria-selected="false">Sécurité</a>
+						</li>
+						<li class="nav-item" role="presentation">
+							<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contactB" role="tab" aria-controls="contact" aria-selected="false">Mot secret</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="tab-content pt-2">
+
+								<div class="tab-pane fade show active profile-overview" id="profile-overview"><br>
+
+									<div class="col-md-12">
+										<div class="card p-4">
+
+											<div class="row">
+												<div class=" ">
+													<h5>
+														<strong>Nom prénom</strong>
+														:
+														{{app.user.nomPrenom}}</h5>
+												</div>
+												<div class="col-lg-9 col-md-8"></div>
+											</div>
+
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>Numéro</strong>
+														:
+														{{app.user.numero}}</h5>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>Email</strong>
+														:
+														{{app.user.email}}</h5>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>Filiére</strong>
+														:
+														{{app.user.filiere}}</h5>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>Spécialité</strong>
+														:
+														{{app.user.specialite}}</h5>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>INE</strong>
+														:
+														{{app.user.ine}}</h5>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>Promotion</strong>
+														:
+														{{app.user.annee}}</h5>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>Mot secret</strong>
+														:
+														{{app.user.email}}</h5>
+												</div>
+											</div>
+
+											
+
+											<div class="row">
+												<div class="">
+													<h5>
+														<strong>Date d'inscription</strong>
+														:
+														{{app.user.dateCreation|date("d-m-Y")}}</h5>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+							<div class="tab-content pt-2">
+
+								<div class="tab-pane fade show active profile-overview" id="profile-overview"><br>
+									<div class="col-md-12">
+										<div class="card">
+											<div class="card-header">
+											<div class="content">
+												<div class="row">
+													<div class="col-lg-2 mb-3">
+														<h4 class="card-title" class="mb-3">Editer mon profil : </h4>
+													</div>
+													<div class="col-lg-4">
+														<a href="{{ path("app_user_parametre_edition_profil", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm ">Commencer</a>
+													</div>
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>
+							</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+							<div class="tab-content pt-2">
+
+							<div class="tab-content pt-2">
+
+								<div class="tab-pane fade show active profile-overview" id="profile-overview"><br>
+									<div class="col-md-12">
+										<div class="card">
+											<div class="card-header">
+												<div>
+													<h4>Mon image actuel : <a href=""></a></h4>
+													<div class="content">
+														<div class="row">
+															<div class="col-lg-3">
+															<div class="card p-3">
+															{% if app.user.photo != 'rien' %}
+															<img src="{{ asset("fichiers/"~app.user.photo) }}" class="d-block w-100" width="159px">
+															{% else %}
+															<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}" class="d-block w-100" width="159px">
+															{% endif %}
+															</div>
+														</div>
+													</div>
+													</div>
+												</div>
+												<div class="content">
+													<div class="row">
+														<div class="col-lg-2 mb-3">
+															<h4 class="card-title">Editer mon image : </h4>
+														</div>
+														<div class="col-lg-3">
+														<a href="{{ path("app_user_parametre_edition_image", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm" >Commencer</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+								
+
+							</div>
+
+						</div>
+
+						<div class="tab-pane fade" id="contactA" role="tabpanel" aria-labelledby="contact-tab">
+							<div class="tab-pane fade show active profile-overview" id="profile-overview"><br>
+									<div class="col-md-12">
+										<div class="card">
+											<div class="card-header">
+												<h4>Mon mot de passe actuel : <strong> {{ app.user.sauvegardeDuMotDePasse }}</strong></h4>
+											<div class="content">
+												<div class="row">
+													<div class="col-lg-3 mb-1">
+														<h4 class="card-title">Editer mon mot de passe : </h4>
+													</div>
+													<div class="col-lg-2">
+														<a href="{{ path("app_user_parametre_edition_password", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm">Commencer</a>
+													</div>
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="contactB" role="tabpanel" aria-labelledby="contact-tab">
+							<div class="tab-pane fade show active profile-overview" id="profile-overview"><br>
+									<div class="col-md-12">
+										<div class="card">
+											<div class="card-header">
+												<h4>Mon mot secret actuel : <strong> {{ app.user.motSecret }}</strong></h4>
+												<div class="content">
+													<div class="row">
+														<div class="col-lg-3 mb-2">
+															<h4 class="card-title">Editer mon mot secret : </h4>
+														</div>
+														<div class="col-lg-3">
+															<a href="{{ path("app_user_parametre_edition_mot_secret", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm">Commencer</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+					</div> #}
+				</div>
+
+			</div>
+		</div>
+		{# </div> #}
+	</div>
+
+	<div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <h5 class="card-title text-center">Mon profil</h5>
+            </div>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Nom prénom: {{app.user.nomPrenom}}</li>
+            <li class="list-group-item">Numéro: {{app.user.numero}}</li>
+            <li class="list-group-item">Email: {{app.user.email}}</li>
+            <li class="list-group-item">Filière: {{app.user.filiere}}</li>
+            <li class="list-group-item">Spécialisté: {{app.user.specialite}}</li>
+            <li class="list-group-item">INE: {{app.user.ine}}</li>
+            <li class="list-group-item">Promotion: {{app.user.annee}}</li>
+            <li class="list-group-item">Date d'inscription: {{app.user.dateCreation|date("d-m-Y")}}</li>
+			 <li class="list-group-item">Editer mon profil: 
+				<a href="{{ path("app_user_parametre_edition_profil", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm ">Commencer</a>
+			</li>
+            <li class="list-group-item">Mot de secret:
+				<a href="{{ path("app_user_parametre_edition_mot_secret", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm">Editer</a>
+			</li>
+            <li class="list-group-item">Mon image: 
+				<a href="{{ path("app_user_parametre_edition_image", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm" >Voir</a>
+			</li>
+            <li class="list-group-item">Mot de passe: 
+				<a href="{{ path("app_user_parametre_edition_password", {"id": app.user.id}) }}" class="btn btn-outline-primary btn btn-sm">Voir</a>
+			</li>
+        </ul>
+    </div>
+{% endblock %}

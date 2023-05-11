@@ -1,0 +1,112 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Tableau de bord
+{% endblock %}
+
+{% block titre %}
+	Mon Profil
+{% endblock %}
+
+{% block boutons %}
+	{# <a href="#" class="btn btn-otline-dark align-items-center">
+			<i class="icon-share"></i>
+			Share</a>
+		<a href="#" class="btn btn-otline-dark">
+			<i class="icon-printer"></i>
+			Print</a>
+		<a href="#" class="btn btn-primary text-white me-0">
+			<i class="icon-download"></i>
+			Export</a> #}
+{% endblock %}
+
+{% block body %}
+
+			<div class="tab-pane fade show active profile-overview" id="profile-overview"><br>
+
+				<div class="content">
+					<div class="row">
+						<div class="col-md-4">
+					<div class="card p-4 mb-3">
+
+						<div class="row">
+							<div class="mb-2">
+								<h5>
+									<strong>Nom prénom</strong>
+									:
+									{{app.user.nomPrenom}}</h5>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="mb-2">
+								<h5>
+									<strong>Numéro</strong>
+									:
+									{{app.user.numero}}</h5>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="mb-2">
+								<h5>
+									<strong>Email</strong>
+									:
+									{{app.user.email}}</h5>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="mb-2">
+								<h5>
+									<strong>INE</strong>
+									:
+									{{app.user.ine}}</h5>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="mb-2">
+								<h5>
+									<strong>Mot secret</strong>
+									:
+									{{app.user.email}}</h5>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="mb-2">
+								<h5>
+									<strong>Date d'inscription</strong>
+									:
+									{{app.user.dateCreation|date("d-m-Y")}}</h5>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="mb-2">
+								<h5>
+									<strong><a href="{{ path("app_admin_compte_parametre_dashboard") }}" class="btn btn-outline-primary "><i class="mdi mdi-account-convert "></i> Faire une modification</a></strong>
+									</h5>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="card p-4">
+						{% if app.user.photo != 'rien' %}
+						<img src="{{ asset("fichiers/"~app.user.photo) }}"  width="170px">
+						{% else %}
+						<img src="{{ asset("doc/assets/images/imageDefaut.jpg") }}"  width="170px">
+						{% endif %}
+					</div>
+				</div>
+					</div>
+				</div>
+
+			</div>
+
+{% endblock %}

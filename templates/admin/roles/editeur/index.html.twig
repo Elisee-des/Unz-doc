@@ -1,0 +1,58 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	liste des editeurs (Chef de promotion)
+{% endblock %}
+
+{% block titre %}
+	liste de tous les editeurs (Chef de promotion)
+{% endblock %}
+
+{% block boutons %}
+<a href="{{ path("app_admin_roles_editeur_ajout") }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un examen">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter un editeur
+    </a>
+  <a href="{{ path("app_admin_roles_editeur_fichier_excel_ajout") }}" class="btn btn-danger align-items-center" title="Cliquez ici pour ajouter un examen">
+		<i class="mdi mdi-arrow-all  "></i>Ajouter un fichier excel
+    </a>
+	{# <a href="{{ path("app_admin_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un examen">
+		<i class="mdi mdi-reply-all  "></i>Retour
+    </a> #}
+{% endblock %}
+
+{% block body %}
+
+        <div>
+          <p>IMPORTANT: <strong>Ici figure la liste des chef de promotion. leur role des d'ajouter des examens et correction lorsqu'ils sont disponible</strong></p>
+        </div>
+
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <div class="table-responsive">
+                    <table class="table table">
+                      <thead>
+                        <tr>
+                          <th>Nom Prénom</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for editeur in editeurs %}
+                        <tr>
+                          <td><strong>{{ editeur.nomPrenom }}</strong></td>
+                          <td>
+                            <a href="{{ path("app_admin_roles_editeur_detail", {"idEditeur": editeur.id}) }}" class="btn btn-outline-dark">Détails</a>
+                          {# <a href="{{ path("app_admin_filiere_liste", {"idDepartement": departement.id}) }}",  class="btn btn-outline-primary">Filières</a> #}
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+{% endblock %}

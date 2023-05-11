@@ -1,0 +1,23 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Edition du departement {{ departement.nom }}
+{% endblock %}
+
+{% block titre %}
+	Edition du departement : <strong>{{ departement.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_departement_detail", {"idDepartement": departement.id}) }}" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="card p-3">
+		{{ form(formDepartement) }}
+	</div>
+
+{% endblock %}

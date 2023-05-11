@@ -1,0 +1,23 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}
+	Edition du filière {{ filiere.nom }}
+{% endblock %}
+
+{% block titre %}
+	Edition du filière : <strong>{{ filiere.nom }}</strong>
+{% endblock %}
+
+{% block boutons %}
+	<a href="{{ path("app_admin_filiere_detail", {"idDepartement": departement.id, "idFiliere": filiere.id}) }}" class="btn btn-outline-primary align-items-center">
+			<i class="mdi mdi-reply-all  "></i>
+			Retour</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="card p-3">
+		{{ form(formFiliere) }}
+	</div>
+
+{% endblock %}

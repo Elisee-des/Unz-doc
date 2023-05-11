@@ -1,0 +1,60 @@
+{% extends 'base.main.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block navbar %}
+	<li>
+		<a href="{{ path("app_main_page_principal") }}">Accueil</a>
+	</li>
+{% endblock %}
+
+{% block intro %}
+
+	<div class="card p-3">
+		<form method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+
+			{% if app.user %}
+				<div class="mb-3 ">
+					Vous êtes déja connecter en tant que
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}" class="btn btn-outline-danger btn btn-sm">Se déconnecter ?</a>
+				</div>
+			{% endif %}
+
+			<h3 class="h3 mb-3 font-weight-normal text-left">Connexion a votre compte</h3>
+			<div class="card p-2 text-left">
+				<label for="inputNumero" class="input-numero">Votre numéro de téléphone</label>
+				<input type="text" value="{{ last_username }}" name="numero" id="inputNumero" class="form-control mb-3" autocomplete="username" required autofocus>
+				<label for="inputPassword" class="input-numero">Votre mot de passe</label>
+				<input type="password" name="password" id="inputPassword" class="form-control mb-3" autocomplete="current-password" required>
+				<div class="input-numero">
+					<input type="checkbox" id="_remember_me" name="_remember_me" checked>
+					<label for="_remember_me" class="input-numero">Se rappeler de moi</label>
+				</div>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"><br>
+				<button class="btn-book-a-table" type="submit">
+					Connexion
+				</button>
+
+			</div>
+			<div class="col-12"><br>
+				<div class="card input-numero">
+					<p class="small center mb-0">J'ai n'es pas de compte
+						<a href="{{ path("app_register") }}">Inscription</a>
+					</p>
+					<p class="small center mb-0">J'ai perdu mon mot de passe
+						<a href="{{ path("app_recuperation_password") }}">Récupérer</a>
+					</p>
+					<p class="small center mb-0">Revenir a la page d'accueil
+						<a href="{{ path("app_main_page_principal") }}">Retour</a>
+					</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</form></div>{% endblock %}
