@@ -1,39 +1,53 @@
 {% extends 'base.admin.html.twig' %}
 
 {% block title %}
-	Plus de détail sur {{ propsExamen.module.nom }}
+	Plus de détail sur
+	{{ propsExamen.module.nom }}
 {% endblock %}
 
 {% block titre %}
-	Plus de détail sur <strong>{{ propsExamen.module.nom }}</strong>
+	Plus de détail sur
+	<strong>{{ propsExamen.module.nom }}</strong>
 {% endblock %}
 
 {% block boutons %}
 	<a href="{{ path("app_admin_proposition_examen_liste") }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
 		<i class="mdi mdi-reply-all  "></i>
-	Retour</a>
+		Retour</a>
 {% endblock %}
 
 {% block body %}
-	 <div class="table-responsive">
-                          <div class="card mb-3">
-                          <div class="card-body">
-                          <h4 class="card-title">{{propsExamen.module.nom}} </h4>
-                            <ul class="list-group">
-                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i>Nom du module: {{ propsExamen.module.nom }}</li>
-                              <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>Filière: {{propsExamen.module.annee.optionn.licence.filiere.nom}} </li>
-                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>Année accademique: {{propsExamen.module.annee.nom}}</li>
-                              <li class="list-group-item"><i class="bi bi-exclamation-octagon me-1 text-warning"></i>Date de proposition: {{propsExamen.dateCreation|date("d-m-y")}}</li>
-                              <li class="list-group-item"><i class="bi bi-check-circle me-1 text-">NB: Lorsque vous aurez validé la veracité du document, celui-ci n'apparaitra plus ici. il sera donc disponible de façon officiel pour tous les etudiants.</i>
-                                <li class="list-group-item"><a href="{{ path("app_admin_proposition_examen_telecharger", {"idPropExamen": propsExamen.id}) }}" 
-                              class="btn btn-outline-danger">Télecharger le fichier</a></li>
-                              <li class="list-group-item"><a href="{{ path("app_admin_proposition_examen_approbation", {"idPropsExamen": propsExamen.id}) }}" 
-                              class="btn btn-outline-primary" onclick="return confirm('En cliquant sur OK, vous attesté que ce document proposé, est valide et correct. Il sera désormais disponible pour la communauté etudiante.')">Approuver</a>
-                              <a href="{{ path("app_admin_proposition_examen_approbation", {"idPropsExamen": propsExamen.id}) }}" 
-                              class="btn btn-outline-danger" onclick="return confirm('En cliquant sur OK, vous désapprovez la veracité de ce document. Par consequent sera supprimer. Etes vous sûr de continuer ?')">Réjeter</a>
-                              </li>
-                            </ul>
-                          </div>
-                          </div>
-                </div>
+	<div class="table-responsive">
+		<div class="card mb-3">
+			<div class="card-body">
+				<h4 class="card-title">{{propsExamen.module.nom}}
+				</h4>
+				<ul class="list-group">
+					<li class="list-group-item">
+						<i class="bi bi-star me-1 text-success"></i>Nom du module:
+						{{ propsExamen.module.nom }}</li>
+					<li class="list-group-item">
+						<i class="bi bi-collection me-1 text-primary"></i>Filière:
+						{{propsExamen.module.annee.optionn.licence.filiere.nom}}
+					</li>
+					<li class="list-group-item">
+						<i class="bi bi-check-circle me-1 text-danger"></i>Année accademique:
+						{{propsExamen.module.annee.nom}}</li>
+					<li class="list-group-item">
+						<i class="bi bi-exclamation-octagon me-1 text-warning"></i>Date de proposition:
+						{{propsExamen.dateCreation|date("d-m-y")}}</li>
+					<li class="list-group-item">
+						<i class="bi bi-check-circle me-1 text-">NB: Lorsque vous aurez validé la veracité du document, celui-ci n'apparaitra plus ici. il sera donc disponible de façon officiel pour tous les etudiants.</i>
+					</li>
+					<li class="list-group-item">
+						<a href="{{ path("app_admin_proposition_examen_telecharger", {"idPropExamen": propsExamen.id}) }}" class="btn btn-outline-danger">Télecharger le fichier</a>
+					</li>
+					<li class="list-group-item">
+						<a href="{{ path("app_admin_proposition_examen_approbation", {"idPropsExamen": propsExamen.id}) }}" class="btn btn-outline-primary" onclick="return confirm('En cliquant sur OK, vous attesté que ce document proposé, est valide et correct. Il sera désormais disponible pour la communauté etudiante.')">Approuver</a>
+						<a href="{{ path("app_admin_proposition_examen_approbation", {"idPropsExamen": propsExamen.id}) }}" class="btn btn-outline-danger" onclick="return confirm('En cliquant sur OK, vous désapprovez la veracité de ce document. Par consequent sera supprimer. Etes vous sûr de continuer ?')">Réjeter</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 {% endblock %}

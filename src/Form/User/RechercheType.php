@@ -24,14 +24,6 @@ class RechercheType extends AbstractType
                 ],
             ])
 
-            ->add('annee', EntityType::class, [
-                "class" => Annee::class,
-                "label" => "Choisir l'année'",
-                "attr" => [
-                    "class" => "form-control",
-                ],
-            ])
-
             ->add('Rechercher', SubmitType::class, [
                 "attr" => [
                     "class" => "btn btn-outline-primary btn btn-sm",

@@ -11,8 +11,8 @@
 
 {% block description %}
 	{# <a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
-			<i class="mdi mdi-reply-all  "></i>Retour
-	    </a> #}
+				<i class="mdi mdi-reply-all  "></i>Retour
+		    </a> #}
 {% endblock %}
 
 {% block body %}
@@ -22,10 +22,10 @@
 			<h4 class="card-title">Effectuer une recherche
 			</h4>
 			{# <div class="d-flex ">
-			      	<a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
-			        <i class="mdi mdi-reply-all  "></i>Retour
-			        </a>
-						</div> #}
+						      	<a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+						        <i class="mdi mdi-reply-all  "></i>Retour
+						        </a>
+									</div> #}
 		</div>
 		<div class="card-body px-0 pb-0">
 			<div class="table-responsive">
@@ -37,17 +37,13 @@
 		</div>
 
 		<h4 class="text-center">Resultat de la recherche</h4>
+		<hr>
+		<h4 class="text-center">Examens</h4>
 
 		{% if examens == NULL %}
 			<h4 class="text-center">
-				<strong>Aucun examen proposé pour le moment. Si vous en possédé, merci de proposé.</strong>
+				<strong>Desolé aucun examen trouvé</strong>
 			</h4>
-			<div>
-				<h4 class="text-center">
-					<a href="{{ path("app_user_document_proposition_examen", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id, "idModule": module.id}) }}" class="btn btn-outline-primary mb-1">Proposer un sujet</a>
-				</h4>
-			</div>
-
 		{% else %}
 			{% for examen in examens %}
 				<div class="card">
@@ -79,6 +75,51 @@
 								<p>Aucun fichier</p>
 							{% else %}
 								<a href="{{ path("app_user_document_examen_telecharger", {"idExamen": examen.id}) }}" class="btn btn-outline-danger">Télecharger l'examen</a>
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+		<hr>
+		<h4 class="text-center">Corrections</h4>
+
+		{% if examens == NULL %}
+			<h4 class="text-center">
+				<strong>Desolé aucune correction trouvé</strong>
+			</h4>
+		{% else %}
+			{% for correction in corrections %}
+				<div class="card">
+					<div class="card-content">
+						<div class="card-body">
+							<h5 class="card-title">{{correction.nom}}</h5>
+						</div>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Nom du module:
+							{{ module.nom }}</li>
+						<li class="list-group-item">Filière:
+							{{filiere.nom}}</li>
+						<li class="list-group-item">Année accademique:
+							{{annee.nom}}</li>
+						<li class="list-group-item">Remarque:
+							{% if correction.remarque == '' %}
+								<p>Aucune remarque</p>
+							{% else %}
+								{{correction.remarque}}
+							{% endif %}
+						</li>
+						<li class="list-group-item">Taille du fichier:
+							{{correction.taille_fichier}}</li>
+						<li class="list-group-item">Date d'ajout:
+							{{correction.date_creation}}</li>
+						<li class="list-group-item">
+							{% if correction.fichier =="aucunFichier" %}
+								<p>Aucun fichier</p>
+							{% else %}
+								<a href="{{ path("app_user_document_examen_telecharger", {"idExamen": correction.id}) }}" class="btn btn-outline-danger">Télecharger l'examen</a>
 							{% endif %}
 						</li>
 					</ul>

@@ -41,7 +41,6 @@ class ExamenRepository extends ServiceEntityRepository
 
     public function findAllExamens($idModule)
     {
-
         $connexion = $this->_em->getConnection();
         $requette = "SELECT * FROM `examen` WHERE module_id=:idModule";
         $resultat = $connexion->executeQuery($requette, ["idModule" => $idModule]);
