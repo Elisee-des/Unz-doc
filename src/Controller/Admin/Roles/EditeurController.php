@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Roles;
 use App\Entity\User;
 use App\Form\Admin\Role\Editeur\AjoutFichierExcelType;
 use App\Form\Admin\Role\Editeur\AjoutType;
+use App\Form\Admin\Role\Editeur\EditionPasswordType;
 use App\Form\Admin\Role\Editeur\EditionType;
 use App\Repository\UserRepository;
 use App\Service\UploaderService;
@@ -86,6 +87,40 @@ class EditeurController extends AbstractController
 
         return $this->render('admin/roles/editeur/ajout.html.twig', [
             "formEditeur" => $form->createView()
+        ]);
+    }
+
+    #[Route('/edition/mot-de-passe/{idEditeur}', name: 'edition_password')]
+    public function editionPassword($idEditeur, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHash, UserRepository $userRepository): Response
+    {
+        $editeur = $userRepository->find($idEditeur);
+
+        $form = $this->createForm(EditionPasswordType::class, $editeur);
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $mdp = $request->get("edition_password")["password"]['first'];
+            $sauvegardeDuMotDePasse = $form->get('password')->getData();
+            $password = $passwordHash->hashPassword($editeur, $mdp);
+
+            $editeur->setPassword($password);
+            $editeur->setSauvegardeDuMotDePasse($sauvegardeDuMotDePasse);
+
+            $em->persist($editeur);
+            $em->flush();
+
+            $this->addFlash(
+               'success',
+               'Mot de passe edité avec success.'
+            );
+
+            return $this->redirectToRoute('app_admin_roles_editeur_detail', ['idEditeur'=>$editeur->getId()]);
+        }
+
+        return $this->render('admin/roles/editeur/editionPassword.html.twig', [
+            "editeur" => $editeur,
+            "formPasswordEditeur" => $form->createView(),
         ]);
     }
 

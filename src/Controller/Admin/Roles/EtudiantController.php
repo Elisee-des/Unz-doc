@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Roles;
 use App\Entity\User;
 use App\Form\Admin\Role\Etudiant\AjoutType;
 use App\Form\Admin\Role\Etudiant\EditionType;
+use App\Form\User\EditionPasswordType;
 use App\Repository\UserRepository;
 use App\Service\UploaderService;
 use DateTime;
@@ -13,6 +14,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/roles/etudiant', name: 'app_admin_roles_etudiant_')]
@@ -104,18 +106,14 @@ class EtudiantController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) { 
-            $mdp = $request->get("edition")["password"];
-            $sauvegardeDuMotDePasse = $form->get('password')->getData();
             $image = $form->get("image")->getData();
             $role = $request->get("edition")["roles"][0];
 
-            
-            
             if ($image == '') {
                 $etudiant->setPhoto('rien');
                 $etudiant->setPhotoNom('rien');
             }
-            
+
             else
             {
                 $photoNom = $image->getClientOriginalName();
@@ -126,11 +124,8 @@ class EtudiantController extends AbstractController
             }
             
             $etudiant->setRoles([$role]);
-            $etudiant->setPassword($mdp);
             $etudiant->setRemerciement(false);
             $etudiant->setDateCreation(new DateTime());
-            $etudiant->setSauvegardeDuMotDePasse($sauvegardeDuMotDePasse);
-
 
             $em->persist($etudiant);
             $em->flush();
@@ -146,6 +141,40 @@ class EtudiantController extends AbstractController
         return $this->render('admin/roles/etudiant/edition.html.twig', [
             "etudiant" => $etudiant,
             "formEtudiant" => $form->createView(),
+        ]);
+    }
+
+    #[Route('/edition/mot-de-passe/{idEtudiant}', name: 'edition_password')]
+    public function editionPassword($idEtudiant, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHash, UserRepository $userRepository): Response
+    {
+        $etudiant = $userRepository->find($idEtudiant);
+
+        $form = $this->createForm(EditionPasswordType::class, $etudiant);
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $mdp = $request->get("edition_password")["password"]['first'];
+            $sauvegardeDuMotDePasse = $form->get('password')->getData();
+            $password = $passwordHash->hashPassword($etudiant, $mdp);
+
+            $etudiant->setPassword($password);
+            $etudiant->setSauvegardeDuMotDePasse($sauvegardeDuMotDePasse);
+
+            $em->persist($etudiant);
+            $em->flush();
+
+            $this->addFlash(
+               'success',
+               'Mot de passe edité avec success.'
+            );
+
+            return $this->redirectToRoute('app_admin_roles_etudiant_detail', ['idEtudiant'=>$etudiant->getId()]);
+        }
+
+        return $this->render('admin/roles/etudiant/editionPassword.html.twig', [
+            "etudiant" => $etudiant,
+            "formPasswordEtudiant" => $form->createView(),
         ]);
     }
 
