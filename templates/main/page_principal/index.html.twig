@@ -26,6 +26,8 @@
           {% elseif is_granted("ROLE_EDITEUR") %}
           <a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Aller dans mon compte</a>
           <a href="{{ path("app_logout") }}" class="btn-book-a-table">Se déconnecter</a>
+          {% elseif is_granted("ROLE_BANI") %}
+				  <a href="{{ path("app_logout") }}" class="btn-book-a-table">Déconnexion</a>
           {% elseif is_granted("ROLE_SUPER_ADMIN") %}
           <a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Aller dans mon compte</a>
           <a href="{{ path("app_logout") }}" class="btn-book-a-table">Se déconnecter</a>

@@ -71,6 +71,8 @@
 				<a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Mon compte</a>
 				{% elseif is_granted("ROLE_EDITEUR") %}
 				<a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Mon compte</a>
+				{% elseif is_granted("ROLE_BANI") %}
+				<a href="{{ path("app_logout") }}" class="btn-book-a-table">Déconnexion</a>
 				{% elseif is_granted("ROLE_SUPER_ADMIN") %}
 				<a href="{{ path("app_admin_dashboard") }}" class="btn-book-a-table">Mon compte</a>
 				{% else %}
@@ -80,7 +82,14 @@
 				<i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
 			</div>
+			
 		</header>
+			{% if is_granted("ROLE_BANI") %}
+				<section class="section">
+			<br><br>
+				<h4 class="text-center">Vous avez été banis. Veuillez contacté un administrateur</h4>
+			</section>
+			{% endif %}
 		<!-- End Header -->
 
 		<!-- ======= Hero Section ======= -->
@@ -97,7 +106,8 @@
 			</section>
 			<!-- End Hero Section -->
 
-			<main id="main"> {% block body %}{% endblock %}
+			<main id="main">
+			 {% block body %}{% endblock %}
 				</main>
 				<!-- End #main -->
 
