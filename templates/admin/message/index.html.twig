@@ -3,20 +3,20 @@
 {% block title %}Liste des messages reçus
 {% endblock %}
 
-{% block titre %}
+{# {% block titre %}
 	Liste des messages reçus
-{% endblock %}
+{% endblock %} #}
 
 {% block body %}
 	<div class="card-body">
-		<h2 class="card-title">Liste des messages envoyé</h2>
+		<h2 class="card-title">Liste des messages reçus</h2>
 		{% if messages == NULL %}
 			<h2 class="text-center">Aucun message pour le moment</h2>
 		{% else %}
-		
+		<br>
 		{% for message in messages %}
 
-			<section class="section profile">
+			{# <section class="section profile">
 				<div class="row">
 					<div class="col-xl-8">
 
@@ -59,7 +59,29 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> #}
+
+			<div class="col-md-8 grid-margin stretch-card mr-2">
+              <div class="card">
+                <div class="card-body">
+				  <ul class="list-group">
+                  <h5 class="card-title">Message</h5>
+				  	<li class="list-group-item">Nom prénom: {{ message.nomPrenom }}</li>
+				  	<li class="list-group-item">Numéro/Email: {{ message.numero }}</li>
+				  	<li class="list-group-item">Sujet: {{ message.sujet }}</li>
+					<li class="list-group-item">Message</li>
+				  	<li class="list-group-item">
+                  	<p>
+						{{ message.message }}
+					</p>
+					</li>
+				  	<li class="list-group-item">
+					<a href="{{ path("app_admin_message_suppression", {"idMessage": message.id}) }}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet message ?')" title="Cliquez ici pour supprimer cet message" class="btn btn-danger">Supprimer</a>
+					</li>
+				  </ul>
+                </div>
+              </div>
+            </div>
 
 		{% endfor %}
 
