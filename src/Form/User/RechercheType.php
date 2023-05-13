@@ -20,7 +20,7 @@ class RechercheType extends AbstractType
                 "class" => Module::class,
                 "label" => "Choisir le module",
                 "attr" => [
-                    "class" => "form-control",
+                    "class" => "form-control select2",
                 ],
             ])
 

@@ -11,8 +11,8 @@
 
 {% block description %}
 	{# <a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
-				<i class="mdi mdi-reply-all  "></i>Retour
-		    </a> #}
+					<i class="mdi mdi-reply-all  "></i>Retour
+			    </a> #}
 {% endblock %}
 
 {% block body %}
@@ -22,10 +22,10 @@
 			<h4 class="card-title">Effectuer une recherche
 			</h4>
 			{# <div class="d-flex ">
-						      	<a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
-						        <i class="mdi mdi-reply-all  "></i>Retour
-						        </a>
-									</div> #}
+									      	<a href="{{ path("app_user_document_option_liste", {"idDepartement": departement.id, "idFiliere": filiere.id, "idLicence": licence.id}) }}" class="btn btn-outline-primary align-items-center" title="Cliquez ici pour ajouter un annee">
+									        <i class="mdi mdi-reply-all  "></i>Retour
+									        </a>
+												</div> #}
 		</div>
 		<div class="card-body px-0 pb-0">
 			<div class="table-responsive">
@@ -42,7 +42,7 @@
 
 		{% if examens == NULL %}
 			<h4 class="text-center">
-				<strong>Desolé aucun examen trouvé</strong>
+				<strong>Examen trouvé</strong>
 			</h4>
 		{% else %}
 			{% for examen in examens %}
@@ -87,7 +87,7 @@
 
 		{% if examens == NULL %}
 			<h4 class="text-center">
-				<strong>Desolé aucune correction trouvé</strong>
+				<strong>Aucune correction trouvé</strong>
 			</h4>
 		{% else %}
 			{% for correction in corrections %}
@@ -126,5 +126,12 @@
 				</div>
 			{% endfor %}
 		{% endif %}
+
+	{% endblock %}
+
+	{% block javascript %}
+		<script>
+			$('.select2').select2({theme: 'bootstrap-5'});
+		</script>
 
 	{% endblock %}

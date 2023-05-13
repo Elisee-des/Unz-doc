@@ -25,7 +25,15 @@ class RechercheController extends AbstractController
         $form = $this->createForm(RechercheType::class);
 
         $form->handleRequest($request);
-        
+        $moduleId = 0;
+        $anneeId = 0;
+        $filiereId = 0;
+        $module = $moduleRepository->find($moduleId);
+        $annee = $anneeRepository->find($anneeId);
+        $filiere = $filiereRepository->find($filiereId);
+        $examens = $examenRepository->findAllExamens($moduleId);
+        $corrections = $correctionRepository->findAllCorrections($moduleId);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $moduleId =  $request->get('recherche')['module'];
