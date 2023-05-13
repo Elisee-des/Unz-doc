@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block boutons %}
+<a href="{{ path("app_admin_roles_admin_edition_password", {"idAdmin": admin.id}) }}" title="Cliquez ici pour editer le mot de passe" class="btn btn-outline-primary align-items-center">
+		<i class="mdi mdi-arrow-all"></i>
+		Editer password</a>
 	<a href="{{ path("app_admin_roles_admin_detail", {"idAdmin": admin.id}) }}" title="Cliquez ici pour revenir en arrière" class="btn btn-outline-primary align-items-center">
 			<i class="mdi mdi-reply-all"></i>
 			Retour</a>
