@@ -12,6 +12,7 @@ use App\Service\UploaderService;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,16 +23,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/liste', name: 'liste')]
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, PaginatorInterface $paginatorInterface, Request $request): Response
     {
         $users = $userRepository->findAll();
 
         foreach ($users as $user) {
             $role = $user->getRoles();
             if (in_array("ROLE_ADMIN", $role)) {
-                $admins[] = $user;
+                $datas[] = $user;
             }
         }
+
+        $admins = $paginatorInterface->paginate(
+            $datas,
+            $request->query->getInt("page", 1),
+            20
+        );
 
         return $this->render('admin/roles/admin/index.html.twig', [
             'admins' => $admins

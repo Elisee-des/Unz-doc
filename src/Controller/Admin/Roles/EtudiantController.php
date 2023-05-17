@@ -35,7 +35,7 @@ class EtudiantController extends AbstractController
         $etudiants = $paginatorInterface->paginate(
             $datas,
             $request->query->getInt("page", 1),
-            3
+            100
         );
 
 
