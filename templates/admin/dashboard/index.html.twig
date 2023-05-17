@@ -365,8 +365,8 @@
                               <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
-                                    <h3 class="card-title card-title-dash">Liste filières</h3>
-                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 dernières ajoutées</p>
+                                  <h3 class="card-title card-title-dash">Liste des filières <a href="{{ path("app_admin_departement_liste") }}" class="btn btn-outline-dark float-right">Voir</a></h3>
+                                   <p class="card-subtitle card-subtitle-dash">Listing</p>
                                   </div>
                                 </div>
                                 {# <div class="d-sm-flex align-items-center mt-1 justify-content-between">
@@ -382,12 +382,14 @@
                                           <thead>
                                             <tr>
                                               <th>Filières</th>
+                                              <th>Action</th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                           {% for filiere in filieres %}
                                             <tr>
                                               <td><strong>{{ filiere.nom }}</strong></td>
+                                              <td><a href="{{ path("app_admin_departement_liste") }}" class="btn btn-outline-dark">Aller</a></td>
                                             </tr>
                                           {% endfor %}
                                           </tbody>
@@ -419,7 +421,7 @@
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
                                     <h4 class="card-title card-title-dash">Liste des examens</h4>
-                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers examens enregistrés</p>
+                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers</p>
                                   </div>
                                   
                                 </div>
@@ -427,13 +429,15 @@
                                   <table id="" class="table table">
                                           <thead>
                                             <tr>
-                                              {# <th>Examens</th> #}
+                                              <th>Examens</th>
+                                              <th>Action</th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                           {% for examen in examens %}
                                             <tr>
-                                              <td><strong>{{ examen.nom }}</strong></td>
+                                              <td><strong>{{ examen.module.nom|striptags|slice(0, 7) }}-{{ examen.module.annee.nom }}</strong>  </td>
+                                              <td><a href="{{ path("app_admin_examen_telecharger", {"idExamen": examen.id}) }}"><i class="menu-icon mdi mdi-format-vertical-align-bottom "></i></a></td>
                                             </tr>
                                           {% endfor %}
                                           </tbody>
@@ -448,21 +452,23 @@
                             <div class="card card-rounded">
                               <div class="card-body card-rounded">
                                 <h4 class="card-title  card-title-dash">Liste Corrections</h4>
-                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers corrections enregistrés</p>
+                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers</p>
                                 <table id="" class="table table">
                                           <thead>
                                             <tr>
-                                              {# <th>Corrections</th> #}
+                                              <th>Corrections</th>
+                                              <th>Action</th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                           {% for correction in corrections %}
                                             <tr>
-                                              <td><strong>{{ correction.nom }}</strong></td>
+                                              <td><strong>{{ correction.module.nom|striptags|slice(0, 7) }}-{{ correction.module.annee.nom }}</strong></td>
+                                              <td><a href="{{ path("app_admin_correction_telecharger", {"idCorrection": correction.id}) }}" class="float-rigth"><i class="menu-icon mdi mdi-format-vertical-align-bottom "></i></a></td>
                                             </tr>
                                           {% endfor %}
                                           </tbody>
-                                    </table>
+                                  </table>
                               </div>
                             </div>
                           </div>
@@ -470,20 +476,22 @@
                             <div class="card card-rounded">
                               <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                  <h4 class="card-title card-title-dash">Liste propositions corrections</h4>
+                                  <h4 class="card-title card-title-dash">Props de corrections</h4>
                                 </div>
-                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers propositions corrections enregistrés</p>
+                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers</p>
                                 <ul class="bullet-line-list">
                                   <table id="" class="table table">
                                           <thead>
                                             <tr>
-                                              {# <th>Propositions Corrections</th> #}
+                                              <th>Props Corrections</th>
+                                              <th>Action</th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                           {% for propoCorrection in propoCorrections %}
                                             <tr>
-                                              <td><strong>{{ propoCorrection.nomPrenom }}</strong></td>
+                                              <td><strong><a href="{{ path("app_admin_proposition_correction_liste") }}" class="float-rigth" title="Aller dans la liste des propositions de corrections"> {{ propoCorrection.module.nom|striptags|slice(0, 7) }}-{{ propoCorrection.module.annee.nom }}</strong></a></td>
+                                              <td><a href="{{ path("app_admin_proposition_correction_telecharger", {"idPropCorrection": propoCorrection.id}) }}" class="float-rigth"><i class="menu-icon mdi mdi-format-vertical-align-bottom "></i></strong></a></td>
                                             </tr>
                                           {% endfor %}
                                           </tbody>
@@ -509,7 +517,7 @@
                                 <div class="row">
                                   <div class="col-lg-12">
                                     <div class="d-flex justify-content-between align-items-center">
-                                      <h4 class="card-title card-title-dash">Dernier messages</h4>
+                                      <h4 class="card-title card-title-dash">Dernier messages <a href="{{ path("app_admin_message_liste") }}" class="btn btn-outline-dark">Ouvrir</a></h4>
                                       <div class="add-items d-flex mb-0">
                                         <!-- <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> -->
                                         <button class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i class="mdi mdi-plus"></i></button>
@@ -520,13 +528,15 @@
                                         <table id="" class="table table">
                                           <thead>
                                             <tr>
-                                              {# <th>Messages</th> #}
+                                              <th>Messages</th>
+                                              {# <th>Action</th> #}
                                             </tr>
                                           </thead>
                                           <tbody>
                                           {% for message in messages %}
                                             <tr>
                                               <td><strong>{{ message.nomPrenom }}</strong></td>
+                                              {# <td></td> #}
                                             </tr>
                                           {% endfor %}
                                           </tbody>
@@ -540,7 +550,7 @@
                           </div>
                         </div>
                         <div class="row flex-grow">
-                          <div class="col-12 grid-margin stretch-card">
+                          {# <div class="col-12 grid-margin stretch-card">
                             <div class="card card-rounded">
                               <div class="card-body">
                                 <div class="row">
@@ -548,13 +558,13 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                       <h4 class="card-title card-title-dash">Trié par accès</h4>
                                     </div>
-                                    <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
+                                    <canvas id="users" ></canvas>
                                     <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> #}
                         </div>
                         <div class="row flex-grow">
                           <div class="col-12 grid-margin stretch-card">
@@ -564,7 +574,7 @@
                                   <div class="col-lg-12">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                       <div>
-                                        <h4 class="card-title card-title-dash">Liste départements</h4>
+                                        <h4 class="card-title card-title-dash">Liste départements <a href="{{ path("app_admin_departement_liste") }}" class="btn btn-outline-dark">Ouvrir</a></h4>
                                       </div>
                                       <div>
                                         {# <div class="dropdown">
@@ -606,21 +616,23 @@
                                   <div class="col-lg-12">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                       <div>
-                                        <h4 class="card-title card-title-dash">Liste Propositons examens</h4>
-                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers propositions corrections enregistrés</p>
+                                        <h4 class="card-title card-title-dash">Props examens</h4>
+                                   <p class="card-subtitle card-subtitle-dash">Listing des 10 derniers</p>
                                       </div>
                                     </div>
                                     <div class="mt-3">
                                       <table id="" class="table table">
                                           <thead>
                                             <tr>
-                                              {# <th>Propositions Examens</th> #}
+                                              <th>Props Examens</th>
+                                              <th>Action</th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                           {% for propoExamen in propoExamens %}
                                             <tr>
-                                              <td><strong>{{ propoExamen.nomPrenom }}</strong></td>
+                                              <td><a href="{{ path("app_admin_proposition_examen_liste") }}" title="Aller dans la liste des propositions d'examens"><strong>{{ propoExamen.module.nom|striptags|slice(0, 7) }}-{{ propoExamen.module.annee.nom }}</strong></a></td>
+                                              <td><a href="{{ path("app_admin_proposition_examen_telecharger", {"idPropExamen": propoExamen.id}) }}" class="float-rigth"><i class="menu-icon mdi mdi-format-vertical-align-bottom "></i></a></td>
                                             </tr>
                                           {% endfor %}
                                           </tbody>
@@ -637,4 +649,45 @@
                   </div>
                 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#example').DataTable();
+
+			// charts
+			const ctx = document.getElementById('users').getContext('2d');
+
+			const myChart = new Chart(ctx, {
+				type: 'doughnut',
+				data: {
+					labels: [
+            Etudiants,
+            Editeurs,
+            Admins,
+            Super Admin
+					],
+					datasets: [{
+						label: 'My First Dataset',
+						data: [
+              {{ TEtudiant }},
+              {{ TEditeur }},
+              {{ TAdmin }},
+              {{ TSuperAdmin }},
+            ],
+						backgroundColor: [
+							'rgb(255, 99, 132)',
+							'rgb(54, 162, 235)',
+							'rgb(255, 205, 86)',
+							'rgb(200, 205, 86)'
+						],
+						hoverOffset: 4
+					}]
+				}
+			});
+
+		});
+	</script>
 {% endblock %}

@@ -28,7 +28,7 @@ class DashboardController extends AbstractController
     MessageRepository $messageRepository): Response
     {
         $users = $userRepository->findAll();
-        $filieres = $filiereRepository->findBy([], ["id"=>"DESC"], 10);
+        $filieres = $filiereRepository->findAll();
         $messages = $messageRepository->findBy([], ["id"=>"DESC"], 10);
         $examens = $examenRepository->findBy([], ["id"=>"DESC"], 10);
         $departements = $departementRepository->findBy([], ["id"=>"DESC"], 10);

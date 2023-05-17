@@ -201,6 +201,24 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin_roles_admin_liste');
     }
 
+    #[Route('/admin/roles/banir/admin/{idAdmin}', name: 'app_admin_roles_admin_restaurer')]
+    public function banissement($idAdmin, UserRepository $userRepository, EntityManagerInterface $em): Response
+    {
+        $admin = $userRepository->find($idAdmin);
+
+        $admin->setRoles(["ROLE_BANI"]);
+
+        $em->persist($admin);
+        $em->flush();
+
+        $this->addFlash(
+           'success',
+           "Vous venez de banir avec success ". $admin->getNomPrenom() . " avec success. Désormis il le sera impossible de se connecter a son compte UNZ-DOC."
+        );
+
+        return $this->redirectToRoute('app_admin_roles_admin_detail', ["idAdmin"=>$admin->getId()] );
+    }
+
     #[Route('/fichier-excel-ajout', name: 'fichier_excel_ajout')]
     public function importationAdmin(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
