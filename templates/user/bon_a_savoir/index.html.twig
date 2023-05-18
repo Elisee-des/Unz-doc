@@ -1,0 +1,79 @@
+{% extends 'base.user.html.twig' %}
+
+{% block title %}
+	Bon à savoir
+{% endblock %}
+
+{% block titre %}
+	Bon à savoir
+	<strong></strong>
+{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block body %}
+
+	<div class="card">
+		<div class="card-header d-flex justify-content-between align-items-center">
+			<h4 class="card-title">Bon à savoir. Obtenez dans cette page des informations importantes.
+			</h4>
+		</div>
+		<div class="card-body px-0 pb-0">
+			<div class="table-responsive">
+				<table class='table mb-0' id="table1">
+						<thead>
+							<tr>
+								<th>Options</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+									<tr>
+										<td>
+											Comment chercher un fichier rapidement ?
+										</td>
+										<td>
+											<a href="" class="btn btn-outline-primary">Lire</a> {# <a href="{{ path("app_user_document_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary">Modules</a> #}
+										</td>
+									</tr>
+                                    <tr>
+                                        <td>
+                                            Ergonomie de UNZ-DOC.
+                                        </td>
+                                        <td>
+											<a href="" class="btn btn-outline-primary">Lire</a> {# <a href="{{ path("app_user_document_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary">Modules</a> #}
+										</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Que faire en cas de problème de connexion ?
+                                        </td>
+                                        <td>
+											<a href="" class="btn btn-outline-primary">Lire</a> {# <a href="{{ path("app_user_document_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary">Modules</a> #}
+										</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Comment fonctionne UNZ-DOC ?
+                                        </td>
+                                        <td>
+											<a href="" class="btn btn-outline-primary">Lire</a> {# <a href="{{ path("app_user_document_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary">Modules</a> #}
+										</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Qui contacté en cas de problème ?
+                                        </td>
+                                        <td>
+											<a href="" class="btn btn-outline-primary">Lire</a> {# <a href="{{ path("app_user_document_module_liste", {"idDepartement": departement.id, "idFiliere": filiere.id,"idLicence": licence.id, "idOption": option.id, "idAnnee": annee.id}) }}" class="btn btn-outline-primary">Modules</a> #}
+										</td>
+                                    </tr>
+                                    
+							</tr>
+						</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
